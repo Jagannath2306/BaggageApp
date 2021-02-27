@@ -11,16 +11,20 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 })
 export class LoginComponent { 
 
-  userInfo: any;
-  userForm: any;
-  isSubmitted: boolean;
-  userLoginForm: FormGroup;
-
   constructor(private _auth: UserAuthService,
     private router: Router,
     private subService: SubjectDataService,
-    private userFormBuilder: FormBuilder) {
+    private fb: FormBuilder) {
   }
+
+  userInfo: any;
+  userForm: any;
+  isSubmitted: boolean;
+
+  userLoginForm = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(8)]]
+  });
 
   get email() {
     return this.userLoginForm.get('email');
@@ -29,33 +33,26 @@ export class LoginComponent {
     return this.userLoginForm.get('password');
   }
   ngOnInit() {
-    this.userLoginForm = this.userFormBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]]
-    });
+
 
   }
 
   LoginUser() {
 
     if (this.userLoginForm.valid) {
-      console.log(this.userLoginForm.value);
       this._auth.validateUser(this.userLoginForm.value).subscribe((res) => {
         localStorage.setItem('token', res.token);
         localStorage.setItem('user', JSON.stringify(this.userLoginForm.value));
-        this.router.navigate(['cart']);
+        this.router.navigate(['home']);
 
         // getting user name for display in header start
-        this._auth.getSingleUser(JSON.parse(localStorage.getItem('user'))).subscribe((res) => {
-          this.userInfo = res;
-          this.subService.updateName(this.userInfo.user.email);
-        });
+
+        this.subService.updateName(this.userLoginForm.value);
+      })
         // getting user name for display in header end
-        
-      }, (err) => {
-        alert("error")
+        , (err) => {
         this.isSubmitted = !this.isSubmitted;
-      });
+        };
     } else {
       Object.keys(this.userLoginForm.controls).forEach(field => {
         const control = this.userLoginForm.get(field);

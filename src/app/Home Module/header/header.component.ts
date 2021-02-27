@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SubjectDataService } from 'src/app/shared/Services/subject-data.service';
 import { GetAllProductsService } from 'src/app/shared/Services/Products/Get All Products/get-all-products.service';
 import { UserAuthService } from '../../shared/User Auth/user-auth.service';
+import { GetSingleItemService } from 'src/app/shared/Services/Products/Get All Products/get-single-item.service';
 
 @Component({
   selector: 'app-header',
@@ -14,33 +15,27 @@ export class HeaderComponent implements OnInit {
   userInfo: any;
   constructor(private subService: SubjectDataService,
     private serviceProducts: GetAllProductsService,
-    private userAuth: UserAuthService) {
+    private userAuth: UserAuthService,
+    private singleItem: GetSingleItemService) {
 
   }
 
   ngOnInit() {
-    // Service call for initial value
-
-    // let path = "http://localhost:3000/myCart"
-
-    // this.serviceProducts.getAllProducts(path).subscribe((response) => {
-    //   this.cartedData = response;
-    //   this.lenthData = this.cartedData.length;
-    // })
-
-    // For Single User info start
-
-    // this.userAuth.getSingleUser(JSON.parse(localStorage.getItem('user'))).subscribe((res) => {
-    //     this.userInfo = res;
-    // } );
-
-    this.subService.subjectName.subscribe((res) => console.log(this.userInfo = res));
-    // For Single User info End
-    // service call for updated value
-
+    let data = JSON.parse(localStorage.getItem("user"));
+    if (data) {
+      this.singleItem.getSingleItem(data).subscribe((res: any) => {
+        if (res.user.name) {
+          this.userInfo = data ? res.user.name : '';
+        } else {
+          alert("data not there")
+        }
+      });
+    }
+    
     this.subService.subject.subscribe((resp) => this.lenthData = resp);
-    // alert("header" + this.lenthData);
+
   }
+
   Logout() {
     this.userAuth.logoutUser();
   }

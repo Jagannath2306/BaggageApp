@@ -61,9 +61,8 @@ export class SignUpComponent implements OnInit {
           this.router.navigate(['/cart']);
 
           // User Name Update start
-          this.auth.getSingleUser(JSON.parse(localStorage.getItem('user'))).subscribe((res) => {
-            this.userInfo = res;
-            this.subService.updateName(this.userInfo.user.fastName);
+          this.subService.subjectName.subscribe((res) => {
+            console.log(this.userInfo = res)
           });
           // User Name Update end
         }, (error) => {

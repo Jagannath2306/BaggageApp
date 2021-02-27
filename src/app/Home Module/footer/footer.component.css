@@ -1,0 +1,122 @@
+.footer-body{
+    /* background-color:#74d2e7; */
+    padding:0px;
+    margin:0px;
+    border :none;
+    /* padding-bottom: 25px; */
+}
+.margin-top{
+    margin-top:7%;
+}
+.footer-container{
+    border-bottom: 1px solid #74d2e7;;
+    padding-bottom: 0.5em;
+    position: relative;
+}
+#logo a span {
+    color: #74d2e7;;
+    font-size: 1.4em;
+    font-weight: 700;
+    text-shadow: 3px 1px 3px rgba(19, 18, 18, 0.19);
+}
+#logo a {
+    /* float: left; */
+    font-size: .8em;
+    display: initial;
+    margin: 0;
+    letter-spacing: 0px;
+    color: #333;
+    font-weight: 300;
+    padding: 3px 0;
+    border: none;
+}
+.sub-des {
+    text-transform: uppercase;
+    display: block;
+    font-size: 0.3em;
+    margin: 0;
+    color: #5b7a9a;
+    letter-spacing: 4px;
+    font-weight: 600;
+    text-shadow: 3px 1px 3px rgba(78, 73, 73, 0.21);
+}
+.footer-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #3a3a3a;
+    font-size: 1.5em;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    margin-bottom: .7em;
+    line-height: 30px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.29);
+
+}
+.footer-box > div{
+  padding: 10px;
+}
+.social-ficons > ul,li{
+   display:inline;
+   padding:0px;
+}
+.social-icon{
+   font-size: 13px;
+   color:black;
+ }
+ .social-icon > span{
+    font-size: 18px;
+    font-weight: 100;
+    color:#3b5998;
+    padding:10px;
+    box-sizing: border-box;
+  }
+  .fa-facebook-f:hover {
+      /* background-color:#3b5998; */
+      color:#3b5998 !important;     
+  }
+  .fa-twitter:hover {
+    /* background-color:#00acee; */
+    color:#00acee !important;     
+}
+.fa-google:hover {
+    /* background-color:#DD4B39; */
+    color:#DD4B39 !important;     
+}
+.border-bottom{
+    border-bottom: .5px solid #74d2e7;
+}
+.cy-right{
+    padding:0px;
+}
+.copy-right{
+    background: #eff1f1;
+    padding:1%;
+    font-size: 0.9em;
+    color: #777;
+    line-height: 1.9em;
+    letter-spacing: 1px;
+}
+a:hover {
+    text-decoration: none;
+}
+.brands-logo{
+    height:30px;
+    width:100px;
+    float: left;
+}
+.brand-sections{
+    position: absolute;
+    bottom: 36px;
+    right: 0px;
+    width:100%;
+}
+
+.logos-slider{
+    height: 96px;
+    position: absolute;
+    top: -5px;
+    right: 130px;
+    max-width: 1050px !important;
+    background-color: #fff !important;
+}

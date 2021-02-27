@@ -1,0 +1,156 @@
+<div class="container-fluid">
+  <div class="row container-row">
+    <div class="row margin-all">
+      <div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-sm heading-text">
+        <h2>Payment Portal</h2>
+      </div>
+      <div class="row">
+        <div class="col-md-8 col-sm-12 col-xs-12">
+          <div class="cart-box">
+
+            <!-- Navigation section -->
+            <div class="stepwizard">
+              <div class="stepwizard-row setup-panel">
+                <div class="stepwizard-step col-xs-4">
+                  <a href="#step-1" type="button" class="btn btn-success
+                    btn-circle active">1</a>
+                  <p><small>Shipper</small></p>
+                </div>
+                <div class="stepwizard-step col-xs-4">
+                  <a href="#step-2" type="button" class="btn btn-default
+                    btn-circle active">2</a>
+                  <p><small>Payment</small></p>
+                </div>
+                <div class="stepwizard-step col-xs-4">
+                  <a href="#step-3" type="button" class="btn btn-default
+                    btn-circle inactive">3</a>
+                  <p><small>Review</small></p>
+                </div>
+              </div>
+            </div>
+            <!-- Navigation section -->
+
+            <!-- form section -->
+
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <div class="row">
+                  <h3 class="text-center">Payment Details</h3>
+                  <img class="img-responsive cc-img"
+                    src="http://www.prepbootstrap.com/Content/images/shared/misc/creditcardicons.png">
+                </div>
+              </div>
+              <div class="panel-body">
+                <form role="form">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>CARD NUMBER</label>
+                        <div class="">
+                          <input appInputButtomBordered  type="tel" class="form-control form-control form-input login-input"
+                            placeholder="Valid Card Number" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-7 col-md-7">
+                      <div class="form-group">
+                        <label><span class="hidden-xs">EXPIRATION</span><span
+                            class="visible-xs-inline">EXP</span> DATE</label>
+                        <input appInputButtomBordered type="tel" class="form-control form-control form-input login-input" placeholder="MM /
+                          YY" />
+                      </div>
+                    </div>
+                    <div class="col-xs-5 col-md-5 pull-right">
+                      <div class="form-group">
+                        <label>CV CODE</label>
+                        <input appInputButtomBordered type="tel" class="form-control form-control form-input login-input" placeholder="CVC"
+                          />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <div class="form-group">
+                        <label>CARD OWNER</label>
+                        <input appInputButtomBordered type="text" class="form-control  form-input login-input"
+                          placeholder="Card Owner Names" />
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="panel-footer">
+                <div class="row">
+                  <div class="col-xs-12">
+                    <button class="btn btn-warning btn-lg btn-block">Process
+                      payment</button>
+                  </div>
+                </div>
+              </div>
+            </div> <div class="place-order">
+              <div class="form-group col-xs-12">
+                <button class="btn btn-subscribe btn-order pull-right
+                  form-control
+                  btn-shutter" (click)="showReview()">Continue</button>
+              </div>
+              <br> <br> <br> <br> <br>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-12 col-xs-12">
+          <div class="cart-box">
+            <div class="row">
+              <div class="col-sm-12">
+                <h3 class="pro-details border-gray">PRICE DETAILS</h3>
+              </div>
+              <div class="col-sm-12">
+                <div class="pro-text">
+                  <span><b>Price (2 items)</b></span>
+                  <span class="pull-right">&#8377; 7,500.00</span>
+                </div>
+                <div class="pro-text border-gray">
+                  <span><b>Delivery</b></span>
+                  <span class="pull-right" style="color:green">FREE</span>
+                </div>
+              </div>
+              <div class="col-sm-12 pro-total">
+                <div class="border-gray">
+                  <span class=""><b>Total Payable</b></span>
+                  <span class="pull-right">&#8377; 7,500.00</span>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <div class="pro-text">
+                  <span class="" style="color:green"><b>You will save
+                      ₹1,300 on
+                      this order</b></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 text-center" style="margin-top:50px;">
+          <h3>Follow Us</h3>
+        </div>
+        <div class="col-md-4 text-center" id="contRow">
+          <ul class="faicons">
+            <li class="faspot_1"><a href=""><i class="fa fa-linkedin
+                  fa-3x"></i></a></li>
+            <li class="faspot_2"><a href=""><i class="fa fa-facebook
+                  fa-3x"></i></a></li>
+            <li class="faspot_3"><a href=""><i class="fa fa-twitter
+                  fa-2x"></i></a></li>
+            <li class="faspot_4"><a href=""><i class="fa
+                  fa-google-plus fa-2x"></i></a></li>
+            <li class="faspot_5"><a href=""><i class="fa fa-reddit
+                  fa-2x"></i></a></li>
+            <li class="faspot_6"><a href=""><i class="fa fa-git
+                  fa-2x"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

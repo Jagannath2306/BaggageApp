@@ -1,0 +1,99 @@
+<header class="header-body">
+  <div class="container-fluid">
+    <div class="container">
+      <div class="row header-container">
+        <div class="col-xs-6">
+          <div class="">
+            <div id="logo">
+              <h1> <a href=""><span class="logo-Baggage">B</span>aggage</a>
+                <label class="sub-des">Online Store</label>
+              </h1>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="log-side pull-right">
+            <a *ngIf="userAuth.loggedin()" routerLink="user/profile" class="btn"><img src="../../../assets/Profile-img.jpg" class="rounded" style="height:40px;width:40px; border-radius: 50%;" alt="Profile image"> <span style="color:#fff; font-weight: bold;"> Hello, {{userInfo}}</span></a>
+            
+             <!-- <a routerLink="cart" class="btn"><span class="fa fa-shopping-cart" aria-hidden="true" style="font-size:30px ;"></span> <span class="badge" *ngIf="lenthData >=1">{{lenthData}}</span></a> -->
+             <a routerLink="cart" class="btn"><img src="../../../assets/Cart.png"
+              style="height:30px;width:35px;" alt=""><span *ngIf="userAuth.loggedin()"><span  class="badge"
+                *ngIf="lenthData >=1">{{lenthData}}</span></span></a>
+
+            <a routerLink="user/signup" *ngIf="!userAuth.loggedin()" class="btn"><span class="glyphicon
+                glyphicon-user color-white"></span> &nbsp;
+              Sign Up</a>
+            <a routerLink="user" *ngIf="!userAuth.loggedin()" class="btn"><span class="glyphicon
+                glyphicon-log-in color-white"></span> &nbsp; Log
+              In</a>
+              <a routerLink="user" *ngIf="userAuth.loggedin()" (click)="Logout()" class="btn"><span class="glyphicon
+                glyphicon-log-out color-white"></span> &nbsp; Logout</a>
+           
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Header first section END -->
+
+    <!-- Header Nav START -->
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-6">
+          <nav class="navbar">
+            <div class="container">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle pull-left"
+                  data-toggle="collapse" data-target="#userNavbar">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+              </div>
+              <div class="collapse navbar-collapse" id="userNavbar">
+                <ul class="nav navbar-nav">
+                  <li class="active menus-item"><a routerLink="home">Home</a></li>
+                  <li class="dropdown menus-item">
+                    <li class="menus-item"><a routerLink="products">Collection</a></li>
+                    <li class="dropdown menus-item">
+                      <a class="dropdown-toggle" data-toggle="dropdown">Brands
+                        <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li><a routerLink="products/puma">Puma</a></li>
+                        <li><a routerLink="products/levis">Levi's</a></li>
+                        <li><a routerLink="products/easy-buy">Easy Buy</a></li>
+                        <li><a routerLink="products/hm">H & M</a></li>
+                        <li><a routerLink="products/trends">Trends</a></li>
+                        <li><a routerLink="products/unlimited">Unlimited</a></li>
+                      </ul>
+                    </li>
+                    <li class="menus-item"><a routerLink="contact/contact-us">Contact
+                        Us</a></li>
+                    <li class="menus-item"><a routerLink="contact">About Us</a></li>
+                  </ul>
+                </div>
+              </div>
+            </nav>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-4 pull-right" style="padding:0px 55px;">
+            <div class="form-group margin-top">
+              <!-- <form action="#" method="post" class="newsletter">
+                <input class="search-box form-control" type="search"
+                  placeholder="Search here..." required>
+                <button class="btn btn-Seaech btn-group-xs search-icon"> <span
+                    class="glyphicon glyphicon-search"></span></button>
+              </form> -->
+              <form action="" class="search-form">
+                <div class="form-group has-feedback">
+            		<label for="search" class="sr-only">Search</label>
+            		<input type="text" class="form-control" name="search" id="search" placeholder="Search...">
+              		<span class="glyphicon glyphicon-search form-control-feedback"></span>
+            	</div>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Header Nav END -->
+    </div>
+
+  </header>

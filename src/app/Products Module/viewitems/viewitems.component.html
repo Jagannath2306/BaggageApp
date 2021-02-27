@@ -1,0 +1,134 @@
+<div class="container-fluid margin-top-md margin-bottom-md">
+  <div class="row ">
+    <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+        <ng-template ngFor let-product [ngForOf]="Iproduct" let-i="index">
+          <article class="center-align">
+            <img class="zoom-img" [imageZoom]="zoomedImageSrc" [allowZoom]="true" [lensWidth]="730" [lensHeight]="600"
+             [windowPosition]="3" [lensBorder]="1" [src]="product.image" width="auto">
+
+          </article>
+        </ng-template>
+    </div>
+
+    <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+      <div class="detail">
+        <section>
+          <div class="row">
+            <div class="col-md-10 col-sm-12 col-xs-12 product-item-details-header">
+              <!-- <p>Women handbag 2019 new fashion sweet leather messenger women bag styling embossed design crossbody
+                bags women shoulder handbags</p> -->
+            </div>
+            <div class="col-md-8 col-sm-12 col-xs-12 product-item-details">
+              <h3>{{modelTitle}}</h3>
+            </div>
+            <div class="col-md-8 col-sm-12 col-xs-12">
+              <ul class="stars-buy">
+                <li><a href="#"><span class="fa fa-star" aria-hidden="true"></span></a></li>
+                <li><a href="#"><span class="fa fa-star" aria-hidden="true"></span></a></li>
+                <li><a href="#"><span class="fa fa-star-half-o" aria-hidden="true"></span></a></li>
+                <li><a href="#"><span class="fa fa-star-half-o" aria-hidden="true"></span></a></li>
+                <li><a href="#"><span class="fa fa-star-o" aria-hidden="true"></span></a></li>
+                <span>&nbsp;3.5 &nbsp; &nbsp; 23 Reviews &nbsp;&nbsp;19 Orders </span>
+              </ul>
+            </div>
+            <div class="col-md-8 col-sm-12 col-xs-12 margin-top-xs">
+              <span class="product-price">&#x20B9; {{onOffer}}</span>&nbsp; &nbsp;
+              <span class="product-price-del"><del>&#x20B9; {{price}}</del></span> &nbsp; &nbsp;
+              <span class="product-disc">- 15%</span>
+            </div>
+            <div class="col-md-8 col-sm-12 col-xs-12 margin-top-xs">
+              <p>Quality: {{qty}}</p>
+              <!-- <span class="badge badge-plus">+</span> &nbsp; 5 &nbsp; <span class="badge badge-min">&#8722;</span> -->
+              <span class="product-price-del">123 pieces available</span>
+            </div>
+            <div class="col-md-8 col-sm-12 col-xs-12">
+              <span><strong>Free Shipping</strong> to India via Baggage Standard Shipping <br>
+                Estimated Delivery: 2 days</span>
+            </div>
+            <div class="col-md-8 col-sm-12 col-xs-12">
+              <h4 class="color-success">In stock.</h4>
+              <span class="color-success"><strong>Guaranteed</strong></span> delivery to pincode
+              <strong>560004</strong> - Bengaluru by <strong> Sunday, August 18 </strong>with <strong> Two-Day
+                Delivery</strong> — Order
+              in the next <span class="color-success"> <strong>37 minutes</strong></span> Details
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 col-sm-12 col-xs-12 margin-top-xs form-group">
+              <button class="btn btn-buy form-control">BUY NOW</button>
+            </div>
+            
+            <div class="col-md-6 col-sm-12 col-xs-12 margin-top-xs form-group">
+              <button *ngIf="!model_box" class="btn btn-cart form-control" (click)="addToCart()"> ADD TO cart</button>
+              <button (click)="showCart()" *ngIf="model_box" class="btn btn-cart form-control"> SHOW CART</button>            </div>
+          </div>
+
+
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- success and error model -->
+<!-- <div class="modal fade" id="addcart" role="dialog">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close text-black" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">{{modelTitle}}</h4>
+      </div>
+      <div class="modal-body">
+          <div *ngIf="isValid"><i class="fa fa-shopping-cart cart-green" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="success-text">Successfully added to your cart.</span></div>
+          <div *ngIf="!isValid"><i class="fa fa-shopping-cart cart-red" aria-hidden="true" ></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="success-text">Something want wrong.</span></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<!-- Success model -->
+<div class="row  text-center">
+  <div class="modal fade modalDialogA" id="modelSucc" tabindex="-1" role="dialogA"
+    aria-labelledby="modalLabelA">
+    <div class="modal-dialog_a modal-md">
+      <div class="modal-content_a">
+        <div class="modal-body_a">
+          <div class="row">
+            <div class="col-sm-12">
+              <h2>Successfully added to your cart</h2>
+            </div> <div class="col-sm-4 col-sm-offset-4 margin-top-md">
+              <button class="btn-custom-success pull-right" (click)="showCart()">GO TO CART</button>
+              <button class="btn-custom-success pull-right" data-dismiss="modal">CANCLE</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Error model -->
+<div class="row text-center">
+  <!-- <button type="button" class="btn btn-primary" data-toggle="modal"
+    data-target=".modalDialogb"></button> -->
+  <div class="modal fade modalDialogb" id="modelErr" tabindex="-1" role="dialogb"
+    aria-labelledby="modalLabelb">
+    <div class="modal-dialog_a modal-lg">
+      <div class="modal-content_b">
+        <div class="modal-body_b">
+          <div class="row">
+            <div class="col-sm-12">
+              <h2>This item already added to your cart !</h2>
+            </div> <div class="col-sm-4 col-sm-offset-4 margin-top-md">
+              <button class="btn-custom-error pull-right" (click)="showCart()" >GO TO CART</button>
+              <button class="btn-custom-error pull-right" data-dismiss="modal">CANCLE</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,333 @@
+.container-row {
+    background-color: #f1f3f6;
+  }
+  .cart-box {
+    background-color: #fff;
+    margin-bottom: 3px;
+    padding: 15px;
+  }
+  .padding-all {
+    padding: 30px;
+  }
+ 
+  .pro-details {
+    display: block;
+    text-transform: uppercase;
+    padding: 13px 24px;
+    font-weight: 500;
+    color: #878787;
+    min-height: 47px;
+    border-radius: 2px 2px 0 0;
+  }
+  .border-gray {
+    border-bottom: 2px solid #f1f3f6;
+  }
+  .pro-text {
+    padding: 15px;
+    font-weight: bold;
+  }
+  .pro-total {
+    padding: 24px;
+    font-size: 20px;
+  }
+  .place-order {
+    background-color: #fff;
+  }
+  .btn-order {
+    margin: 25px;
+  }
+  .place-order {
+    background-color: #fff;
+  }
+  .btn-order {
+    margin: 25px;
+  }  
+
+  /* form section */
+
+  .form-input{
+    border:none;
+    outline: 0px;
+    border-bottom:1px solid #222121;
+    box-shadow:none;
+    border-radius: 0px;
+    margin-top:18px;
+}
+.login-input {
+  padding: 0.85em 1em;
+  color: #495057;
+  border-radius: 0.25rem;
+  font-size: 0.9em;
+  border: none;
+  outline: none;
+  letter-spacing: 2px;
+  box-shadow: 1px 3px 8px 0 rgba(0, 0, 0, 0.15);
+  height: 50px;
+  border-bottom: 1px solid #495057;
+}
+
+/* navigation section */
+.cc-img {
+  margin: 0 auto;
+}
+
+/* Latest compiled and minified CSS included as External Resource*/
+
+/* Optional theme */
+
+/*@import url('//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css');*/
+
+.stepwizard-step p {
+  margin-top: 0px;
+  color: #666;
+}
+
+.stepwizard-row {
+  display: table-row;
+}
+
+.stepwizard {
+  display: table;
+  width: 100%;
+  position: relative;
+  margin:40px 0px;
+ 
+}
+
+
+.stepwizard .btn.disabled,
+.stepwizard .btn[disabled],
+.stepwizard fieldset[disabled] .btn {
+  opacity: 1 !important;
+  color: #bbb;
+}
+
+.stepwizard-row:before {
+  top: 14px;
+  bottom: 0;
+  position: absolute;
+  content: " ";
+  width: 65%;
+  height: 1px;
+  background-color: #ccc;
+  z-index: 0;
+  left: 133px;
+}
+
+.stepwizard-step {
+  display: table-cell;
+  text-align: center;
+  position: relative;
+}
+
+.btn-circle {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 2.428571;
+  border-radius: 20px;
+  background-color: #c3c3c3;
+}
+.active{
+  background-color: #74d2e7 !important;
+}
+.inactive{
+  color:#fff;
+}
+/* navigation section */
+
+/* btn section */
+
+.btn-subscribe {
+  background-color: #74d2e7;
+  color: #fff;
+  padding: 0.8em 3em;
+  text-transform: uppercase;
+  font-size: 0.9em;
+  letter-spacing: 2px;
+  font-weight: 600;
+  box-shadow: 1px 3px 8px 0 rgba(0, 0, 0, 0.15);
+  height: 50px;
+  width: 30%;
+}
+
+.btn-shutter {
+  color: #fff;
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  background-color: #74d2e7;
+  transition: all 0.3s ease-in-out;
+  padding: 5px 15px;
+  border-radius: 0;
+  letter-spacing: 1.5px;
+  font-weight: 900;
+}
+
+.btn-shutter:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  transition: all 0.3s ease-in-out;
+  background-color: orangered;
+  z-index: -1;
+}
+
+.btn-shutter:hover {
+  background-color: transparent;
+  color: #ffffff;
+}
+
+.btn-shutter:hover:before {
+  width: 100%;
+}
+
+/* ////////////////////// */
+
+/* Overlay start */
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+  width: 89%;
+  height: 0;
+  transition: 0.7s ease;
+  margin-left: 14px;
+  box-sizing: border-box;
+}
+
+.layout-text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 30%;
+  left: 60%;
+  white-space: nowrap;
+  text-align: left;
+  padding-top: 50px;
+  /* margin: 0; */
+  letter-spacing: 1px;
+  font-family: "Hind", sans-serif;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.overlay-btn {
+  padding: 2px 30px 2px 30px;
+  background-color: orangered;
+  color: #fff;
+  /* font-size: .9em; */
+  margin: 0;
+  letter-spacing: 1px;
+  font-family: "Hind", sans-serif;
+  border: 0px;
+  border-radius: 2px;
+  box-shadow: 1px 3px 8px 0 rgba(0, 0, 0, 0.15);
+}
+/* btn section */
+
+/* icon section */
+#contRow {
+  margin-bottom: 70px;
+  padding-top: 30px;
+  left: 80px;
+}
+
+.faicons {
+  position: relative;
+  height: 3em;
+  width: 13.5em;
+  text-align: center;
+  padding-top: 100px;
+}
+
+.faicons li {
+  display: block;
+  height: 4em;
+  line-height: 4em;
+  margin: -2.2em;
+  position: absolute;
+  -webkit-transition: -webkit-transform .7s;
+  -moz-transition: -moz-transform .7s;
+  -ms-transition: -ms-transform .7s;
+  -o-transition: -o-transform .7s;
+  transition: transform 0.7s;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  text-align: center;
+  width: 4em;
+}
+
+.faicons a {
+  color: #fffdf0;
+  display: block;
+  height: 4em;
+  line-height: 6em;
+  text-align: center;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+  width: 4em;
+}
+
+.faicons li:hover {
+  -webkit-transform: scale(1.3,1.3) rotate(-35deg);
+  -moz-transform: scale(1.3,1.3) rotate(-35deg);
+  -ms-transform: scale(1.3,1.3) rotate(-35deg);
+  -o-transform: scale(1.3,1.3) rotate(-35deg);
+  transform: scale(1.3,1.3) rotate(-35deg);
+}
+
+.faspot_1 {
+  background: #1A85BC;
+  left: 0;
+  top: 50%;
+}
+
+.faspot_2 {
+  background: #02aaf8;
+  top: 75;
+  left: 25%;
+}
+
+.faspot_3 {
+  background: #5EA9DD;
+  left: 50%;
+  top: 50%;
+}
+
+.faspot_4 {
+  background: #DC4A38;
+  top: 75;
+  left: 75%;
+}
+
+.faspot_5 {
+  background: #FF4500;
+  left: 100%;
+  top: 50%;
+}
+
+.faspot_6 {
+  background: #000000;
+  top: 75;
+  left: 125%;
+}
+
+/* icon section */

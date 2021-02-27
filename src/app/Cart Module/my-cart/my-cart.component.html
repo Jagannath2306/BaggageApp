@@ -1,0 +1,139 @@
+<div class="container-fluid">
+  <div class="row container-row">
+    <div class="row margin-all">
+      <div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-sm heading-text">
+        <h2>My Cart</h2>
+      </div>
+      <div class="row">
+        <div class="col-md-8 col-sm-12 col-xs-12">
+          <ng-template ngFor let-product [ngForOf]="CartProducts" let-i="index">
+            <div class="cart-box">
+              <div class="row padding-all">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                  <img [(src)]="product.image" height="130" width="200" alt="">
+                </div>
+                <div class="col-sm-5 col-md-5 col-lg-5 padding-left-md
+                  cart-text">
+                  <h4>{{product.title}}</h4>
+                  <p>{{product.brand}} ({{product.color}})</p>
+                  <h4 class="P-prices"> &#8377;{{product.priceOnOffer}}</h4>
+                  <span class="P-offer-price"><del>&#8377;{{product.price}}</del></span>
+                  <span class="P-discount"> &nbsp; &nbsp; - 15% Off</span> <br>
+                  <i class="fa fa-heart"></i><span class="P-like-dis">{{product.like}}&nbsp;
+                  </span><i class="fa fa-heart fa-heart-bro"></i><span
+                    class="P-like-dis">&nbsp;{{product.unLike}} </span>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4 cart-text">
+                  <span> <h5
+                      style="display:inline-block"> <span class="glyphicon
+                        glyphicon-map-marker"></span> Delivery in 3 - 4 days
+                      | <span style="color:green; font-weight:bold">Free</span>
+                      ₹40 </h5></span>
+                  &nbsp;&nbsp;&nbsp; <span>10 Days Replacement Policy</span>
+                  <div style="margin-left:10%">
+                    <p style="font-weight: bold;margin-top:10px;">Quentity:</p>
+                    <div class="plus-mins">+</div>
+                    <p style="display: inline-block; margin:0px 10px">5</p>
+                    <div class="plus-mins">-</div>
+                    <!-- <button type="button" class="btn btn-default btn-custom
+                      pull-right" data-toggle="modal" data-target="#modelErr">REMOVE</button> -->
+                    <button type="button" class="btn btn-default btn-custom
+                      pull-right" (click)="removeItem(product)">REMOVE</button>
+                    <!-- <button class="btn btn-default plus-mins">-</button>
+                            <p style="display: inline-block; margin:0px 10px">5</p>
+                            <button class="btn btn-default plus-mins">+</button> -->
+                  </div>
+                  <div>
+                    <!-- <button class="btn btn-primary btn-custom">SAVE FOR LATER</button> -->
+                    <!-- <button class="btn btn-primary pull-right">REMOVE</button> -->
+                    <!-- <button type="button" class="btn btn-default btn-custom pull-right">REMOVE</button>       -->
+                  </div>
+                </div>
+              </div>
+              <!-- success and error model -->
+              <!-- Error model -->
+              <div class="row text-center" style="display:
+                block;">
+                <div class="modal fade modalDialogb" id="modelErr" tabindex="-1"
+                  role="dialogb"
+                  aria-labelledby="modalLabelb">
+                  <div class="modal-dialog_a modal-lg">
+                    <div class="modal-content_b">
+                      <div class="modal-body_b">
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <h2>Are you sure ?</h2>
+                          </div> <div class="col-sm-4 col-sm-offset-4
+                            margin-top-md">
+                            <button class="btn-custom-error pull-right"
+                              >DELETE</button>
+                            <button class="btn-custom-error pull-right"
+                              data-dismiss="modal">CANCLE</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+          <div class="place-order">
+            <div class="form-group col-xs-12">
+              <button *ngIf="count_data >=1" class="btn btn-subscribe btn-order pull-right form-control
+                btn-shutter"(click)="placeOrder()">place an order</button>
+                <h4 *ngIf="count_data <=0" style="padding:15px" >No item(s) found in your cart.</h4>
+            </div>
+            <br> <br> <br> <br> <br>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-12 col-xs-12">
+          <div class="cart-box">
+            <div class="row">
+              <div class="col-sm-12">
+                <h3 class="pro-details border-gray">PRICE DETAILS</h3>
+              </div>
+              <div class="col-sm-12">
+                <div class="pro-text">
+                  <span><b>Price ({{CartProducts.length}} items)</b></span>
+                  <span class="pull-right">&#8377; {{totalAmount}}</span>
+                </div>
+                <div class="pro-text border-gray">
+                  <span><b>Delivery</b></span>
+                  <span class="pull-right" style="color:green">FREE</span>
+                </div>
+              </div>
+              <div class="col-sm-12 pro-total">
+                <div class="border-gray">
+                  <span class=""><b>Total Payable</b></span>
+                  <span class="pull-right">&#8377;{{totalAmount}}</span>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <div class="pro-text">
+                  <span class="" style="color:green"><b>You will save ₹ {{disAmount}} on
+                      this order</b></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row margin-top-md">
+      <div class="col-md-12 col-sm-12 col-xs-12">
+        <ul class="pagination pull-right">
+          <li><a href="#"><<<</a></li>
+            <li class="active"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li><a href="#">5</a></li>
+            <li><a href="#">>>></a></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>

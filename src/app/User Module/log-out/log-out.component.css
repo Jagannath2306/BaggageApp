@@ -1,0 +1,71 @@
+.margin-top-md {
+    margin-top: 40px;
+}
+.margin-top-sm {
+    margin-top: 20px;
+}
+.success-title {
+    font-size: 35px;
+    font-family: sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    color:#47c47b;
+}
+.border-top{
+    border-top: 1px solid #74d2e7;
+    padding-left:0px;
+}
+.success-content{
+    padding-top:6%;
+    display:block
+}
+.re-visit-msg > p {
+    font-size: 15px;
+    font-weight: 500 !important;
+    letter-spacing: 2px ;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+@media screen and (max-width: 1024px){
+ 
+    .success-title{
+        font-size: 28px;
+        font-weight: 300;
+    }
+    .success-content{
+        padding-top:11%;
+        display:block
+    }
+}
+@media screen and (max-width: 700px){
+ 
+    .success-title{
+        font-size: 23px;
+        font-weight: 300;
+    }
+    .success-content{
+        padding-top:13%;
+        display:block
+    }
+}
+@media screen and (max-width: 600px){
+ 
+    .success-title{
+        font-size: 20px;
+        font-weight: 300;
+    }
+    .success-content{
+        padding-top:11%;
+        display:block
+    }
+}
+@media screen and (max-width: 320px){
+ 
+    .success-title{
+        font-size: 15px;
+        font-weight: 300;
+    }
+    .success-content{
+        padding-top:19%;
+        display:block
+    }
+}

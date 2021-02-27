@@ -1,0 +1,86 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12 margin-all " align="center">
+      <span class="signin-title">Sign In</span> <br> <span class="signin-title-sub">New to Baggage ?<a routerLink="signup" class="c-pointer"> Sign
+          Up</a></span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-sm-12 col-xs-12 form-side ">
+      <div class="row">
+        <div class="col-md-4 col-sm-12 col-xs-12">
+        </div>
+        <div class="col-md-8 col-sm-12 col-xs-12">
+         <div class="text-center">
+            <small *ngIf="isSubmitted" class="wrong-user">
+            Incorrect email or password
+          </small>
+         </div>
+          <form [formGroup]="userLoginForm" (ngSubmit)="LoginUser()">
+            <div class="form-group">
+              <input type="email" autocomplete="off" formControlName="email" appInputButtomBordered
+                class="form-control form-input login-input" id="text" [class.err-btm-border]="isSubmitted"
+                [class.err-btm-border]="userLoginForm.get('email').invalid && userLoginForm.get('email').touched"
+                placeholder="Email or Id">
+              <!-- <small [class.hideClass]="!email.valid && email.untouched" [class.redColor]="email.invalid && email.touched"> Please enter a valid Email ID e.g.: abc@abc.com</small>
+                <small [class.hideClass]="!email.valid && email.untouched" [class.redColor]="email.invalid && email.touched"> Please enter a valid Email ID e.g.: abc@abc.com</small> -->
+              <div *ngIf="userLoginForm.get('email').invalid && userLoginForm.get('email').touched">
+                <small *ngIf="email.errors?.email" class="redColor">
+                  Please enter a valid Email ID e.g.: abc@abc.com</small>
+                <small *ngIf="email.errors?.required" class="redColor">
+                  Email or Id is required.
+                </small>
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="password" autocomplete="off" formControlName="password" appInputButtomBordered
+                class="form-control form-input login-input" [class.err-btm-border]="isSubmitted"
+                [class.err-btm-border]="userLoginForm.get('password').invalid && userLoginForm.get('password').touched"
+                placeholder="Password">
+              <div *ngIf="userLoginForm.get('password').invalid && userLoginForm.get('password').touched">
+                <small *ngIf="password.errors?.required" class="redColor">
+                  Password is required.
+                </small>
+                <small *ngIf="password.errors?.minlength" class="redColor">
+                  Passwords must have at least 8 characters.
+                </small>
+              </div>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-subscribe form-control btn-shutter">LogIn</button>
+            </div>
+            <div class="form-group">
+              <a routerLink="forgot-Password" class="pull-right c-pointer" >Forgot Password ?</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-12 col-xs-12 media-side">
+      <div class="row">
+        <div class="col-md-8 col-sm-12 col-xs-12">
+          <div class="medias-fb">
+            <a href="#"> <span class="fa fa-facebook-f media-fb"></span></a> <span class="text-span">Continue With
+              Facebook</span>
+          </div>
+          <div class="medias-go">
+            <a href="#"><span class="fa fa fa-google media-go"></span></a> <span class="text-span">Continue With
+              Google</span>
+          </div>
+          <div class="medias-tw">
+            <a href="#"><span class="fa fa fa-twitter media-tw"></span></a> <span class="text-span">Continue With
+              Twitter</span>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-12 col-xs-12">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 col-mf-offset-5 col-sm-12 col-xs-12 margin-top-md" align="center">
+      * By logging in, you agree to our <a href="#"> Terms of Use</a> and to <br> receive Baggage emails & updates and
+      acknowledge that you <br> read our <a href="#">Privacy Policy</a>.
+    </div>
+  </div>
+</div>

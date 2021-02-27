@@ -16,12 +16,6 @@ export class LoginComponent {
   isSubmitted: boolean;
   userLoginForm: FormGroup;
 
-  // userLoginForm = new FormGroup({
-  //   email: new FormControl(''),
-  //   password: new FormControl('')
-  // });
-
-
   constructor(private _auth: UserAuthService,
     private router: Router,
     private subService: SubjectDataService,
@@ -54,7 +48,7 @@ export class LoginComponent {
         // getting user name for display in header start
         this._auth.getSingleUser(JSON.parse(localStorage.getItem('user'))).subscribe((res) => {
           this.userInfo = res;
-          this.subService.updateName(this.userInfo.user.name);
+          this.subService.updateName(this.userInfo.user.email);
         });
         // getting user name for display in header end
         

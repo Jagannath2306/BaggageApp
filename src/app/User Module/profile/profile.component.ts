@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PostServicesService } from 'src/app/shared/Services/Post Services/post-services.service';
 import { GetSingleItemService } from 'src/app/shared/Services/Products/Get All Products/get-single-item.service';
@@ -29,7 +29,11 @@ export class ProfileComponent implements OnInit {
     password: ['', [Validators.required, Validators.minLength(8)]],
     dateofbirth: ['', [Validators.required]],
     phone: ['', [Validators.required, Validators.minLength(10)]],
+    profileImg: ['',],
     address: this.fb.array([]),
+  });
+  profileForm = this.fb.group({
+    profileImg: ['',]
   });
 
 
@@ -38,7 +42,7 @@ export class ProfileComponent implements OnInit {
     this.singleItem.getSingleItem(data).subscribe((res: any) => {
       this.singleUsertitle = res.user.name;
       this.singleUser = res;
-      console.log(this.singleUser)
+      console.log(this.singleUser = res)
       this.status = "success";
     }), (err) => {
       this.status = "error";
@@ -72,8 +76,6 @@ export class ProfileComponent implements OnInit {
   }
 
   submitForm() {
-    this.userRegistrationForm.value;
-
     if (this.userRegistrationForm.value) {
       const updatedUser = Object.assign({}, this.userRegistrationForm.value, { "_id": this.singleUser.user._id })
       this.userUpdate._updateSingleUser(updatedUser).subscribe(
@@ -92,6 +94,30 @@ export class ProfileComponent implements OnInit {
   editProfile() {
     $("#profile-form").toggle();
     this.setControlValues(this.singleUser.user);
+  }
+
+  @ViewChild('fileupload') fileupload: ElementRef;
+
+  getImage(evt) {
+    if (evt.target.files && evt.target.files[0]) {
+      const render = new FileReader();
+      render.onload = (event: ProgressEvent) => {
+        console.log(event)
+      }
+    }
+  }
+
+  profileSubmit() {
+    // const imgurl = this.fileupload.nativeElement.files[0];
+    const data = Object.assign({}, { "_id": this.singleUser.user._id })
+    // console.log(data)
+    this.userUpdate._updateUserProfile(data, this.fileupload.nativeElement.files[0]).subscribe((res) => {
+      console.log(res)
+    }, (err) => {
+      console.log(err)
+    }
+    )
+
   }
 
 }

@@ -20,9 +20,30 @@
   </div>
   <hr class="margin-top">
 </div>
+<div class="container">
+</div>
 <!-- Edit profile section start here -->
 <div class="container margin-top-lg d-none" id="profile-form">
-  <form role="form" [formGroup]="userRegistrationForm" (ngSubmit)="submitForm()">
+  <form role="form" [formGroup]="profileForm" (ngSubmit)="profileSubmit()" action="/uploadphoto" method="POST"
+    enctype="multipart/form-data">
+    <div class="row">
+      <div class="col-sm-8">
+        <div class="form-group">
+          <label for="Profile">Upload Profile Image</label>
+          <input appInputButtomBordered #fileupload (change)="getImage($event)" type="file" name="profileImg"
+            formControlName="profileImg" autocomplete="off" accept="image/*"
+            class="form-control form-input                                                                                                                  login-input"
+            id="Profile" placeholder="">
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <button class="btn btn-subscribe form-control btn-shutter margin-top-sm pull-right" type="submit">Upload</button>
+      </div>
+    </div>
+  </form>
+  
+  <form role="form" [formGroup]="userRegistrationForm" (ngSubmit)="submitForm()" action="/singleUserUpdate" method="POST"
+    enctype="multipart/form-data">
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
@@ -69,7 +90,8 @@
           </div>
         </div>
     </div>
-    <div class="row">
+  
+      <div class="row">
       <div class="col-sm-12">
         <div formArrayName="address">
           <div *ngFor="let address of address.controls; let i=index">

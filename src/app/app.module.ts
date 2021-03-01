@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 // Modules
 import { SharedModule } from './shared/shared.module';
 

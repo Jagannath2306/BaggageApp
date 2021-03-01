@@ -3,6 +3,7 @@ import { UserAuthService } from 'src/app/shared/User Auth/user-auth.service';
 import { Router } from '@angular/router';
 import { SubjectDataService } from 'src/app/shared/Services/subject-data.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { GetSingleItemService } from 'src/app/shared/Services/Products/Get All Products/get-single-item.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginComponent {
   constructor(private _auth: UserAuthService,
     private router: Router,
     private subService: SubjectDataService,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private singleItem: GetSingleItemService) {
   }
 
   userInfo: any;
@@ -46,8 +48,10 @@ export class LoginComponent {
         this.router.navigate(['home']);
 
         // getting user name for display in header start
-
-        this.subService.updateName(this.userLoginForm.value);
+        let data = this.userLoginForm.value;
+        this.singleItem.getSingleItem(data).subscribe((res: any) => {
+          this.subService.updateName(res.user.name);
+        });
       })
         // getting user name for display in header end
         , (err) => {

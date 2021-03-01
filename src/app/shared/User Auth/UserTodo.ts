@@ -4,6 +4,7 @@ export interface UserToDo {
   email: String,
   password: String,
   phone: [],
+  dateofbirth: String,
   address: [],
   cart: [],
   history: [],

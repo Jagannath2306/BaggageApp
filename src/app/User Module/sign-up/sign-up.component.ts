@@ -10,20 +10,11 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 })
 export class SignUpComponent implements OnInit {
 
-  // registerUserData = {
-   //  name : ""
-  //   email: "",
-  //   password: "",
-  //   phone: "",
-  //   address: [],
-  //   cart: [],
-  //   history: [],
-  //   cards:[],
-  //   profileImg:""
-  // };
+
   userInfo: any;
   userRegistrationForm: FormGroup;
   isSubmitted: boolean;
+
   constructor(private auth: UserAuthService,
     private router: Router,
     private subService: SubjectDataService,
@@ -45,26 +36,28 @@ export class SignUpComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       phone: ['',],
+      dateofbirth: ['',],
       address:["",],
       cart:["",],
       history:["",],
       cards:["",],
       profileImg:["",]
     });
-
   }
+
   RegisterUser() {
     if (this.userRegistrationForm.valid) {
         this.auth.registerUser(this.userRegistrationForm.value).subscribe((res) => {
           localStorage.setItem('token', res.token);
           localStorage.setItem('user', JSON.stringify(this.userRegistrationForm.value));
-          this.router.navigate(['/cart']);
+          this.router.navigate(['/home']);
 
           // User Name Update start
-          this.subService.subjectName.subscribe((res) => {
-            console.log(this.userInfo = res)
-          });
+          // this.subService.subjectName.subscribe((res) => {
+          // });
+          this.subService.updateName(this.userRegistrationForm.get('name').value);
           // User Name Update end
+
         }, (error) => {
           this.isSubmitted = !this.isSubmitted;
           console.log(error)

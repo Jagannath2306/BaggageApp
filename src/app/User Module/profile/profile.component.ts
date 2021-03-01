@@ -27,6 +27,7 @@ export class ProfileComponent implements OnInit {
     name: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(8)]],
+    dateofbirth: ['', [Validators.required]],
     phone: ['', [Validators.required, Validators.minLength(10)]],
     address: this.fb.array([]),
   });
@@ -37,6 +38,7 @@ export class ProfileComponent implements OnInit {
     this.singleItem.getSingleItem(data).subscribe((res: any) => {
       this.singleUsertitle = res.user.name;
       this.singleUser = res;
+      console.log(this.singleUser)
       this.status = "success";
     }), (err) => {
       this.status = "error";
@@ -59,7 +61,9 @@ export class ProfileComponent implements OnInit {
       name: user.name,
       email: user.email,
       password: user.password,
+      dateofbirth: user.dateofbirth,
       phone: user.phone
+
     });
 
     user.address.map(elm => {

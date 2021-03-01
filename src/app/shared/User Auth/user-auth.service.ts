@@ -19,7 +19,6 @@ export class UserAuthService {
   // for user register or sign up start
 
   registerUser(user: UserToDo): Observable<any> {
-    console.log(user)
     return this.http.post<UserToDo>(`${this._registerUrl}`, user);
   }
   // for user register or sign up end

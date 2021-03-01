@@ -22,16 +22,20 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     let data = JSON.parse(localStorage.getItem("user"));
+    this.userInfo = "";
+    this.subService.subjectName.subscribe(res => {
+      this.userInfo = res;
+    })
     if (data) {
       this.singleItem.getSingleItem(data).subscribe((res: any) => {
         if (res.user.name) {
-          this.userInfo = data ? res.user.name : '';
+          this.userInfo = this.userInfo === "" ? res.user.name : this.userInfo;
         } else {
           alert("data not there")
         }
       });
     }
-    
+
     this.subService.subject.subscribe((resp) => this.lenthData = resp);
 
   }

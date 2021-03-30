@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { UserAuthService } from "../../shared/User Auth/user-auth.service"
 import { Router } from '@angular/router';
-import { SubjectDataService } from 'src/app/shared/Services/subject-data.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { ApiService } from 'src/app/shared/services/api-service';
+import { NotificationService } from 'src/app/Notification/notification-service';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -15,9 +15,9 @@ export class SignUpComponent implements OnInit {
   userRegistrationForm: FormGroup;
   isSubmitted: boolean;
 
-  constructor(private auth: UserAuthService,
-    private router: Router,
-    private subService: SubjectDataService,
+  constructor(private router: Router,
+    private apiService: ApiService,
+    private notificationService: NotificationService,
     private userRegistrationBuilder: FormBuilder) { }
 
   get name() {
@@ -41,26 +41,17 @@ export class SignUpComponent implements OnInit {
       cart:["",],
       history:["",],
       cards:["",],
-      profileImg:["",]
+      profilePhoto: ["",]
     });
   }
 
   RegisterUser() {
     if (this.userRegistrationForm.valid) {
-        this.auth.registerUser(this.userRegistrationForm.value).subscribe((res) => {
-          localStorage.setItem('token', res.token);
-          localStorage.setItem('user', JSON.stringify(this.userRegistrationForm.value));
-          this.router.navigate(['/home']);
-
-          // User Name Update start
-          // this.subService.subjectName.subscribe((res) => {
-          // });
-          this.subService.updateName(this.userRegistrationForm.get('name').value);
-          // User Name Update end
-
+      this.apiService.signup(this.userRegistrationForm.value).subscribe((res) => {
+        this.notificationService.showNotification("success", "You have successfully signed up");
+        this.router.navigate(['user']);
         }, (error) => {
-          this.isSubmitted = !this.isSubmitted;
-          console.log(error)
+        this.isSubmitted = !this.isSubmitted;
         });
     } else {
       Object.keys(this.userRegistrationForm.controls).forEach(field => {

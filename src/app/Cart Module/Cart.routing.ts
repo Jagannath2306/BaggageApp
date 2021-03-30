@@ -4,12 +4,11 @@ import { MyCartComponent } from './my-cart/my-cart.component';
 import { BillingAddressComponent } from './billing-address/billing-address.component';
 import { PaymentPortalComponent } from './payment-portal/payment-portal.component';
 import { ReviewComponent } from './review/review.component';
-import { AuthGuard } from '../shared/Auth Guard/auth.guard';
+
 
 const routes: Routes = [
     {
-        path: '', component: MyCartComponent,
-         canActivate :[AuthGuard]
+        path: '', component: MyCartComponent
     },
     {
         path: 'billingAddress', component: BillingAddressComponent

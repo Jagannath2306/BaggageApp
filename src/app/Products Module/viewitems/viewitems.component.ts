@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { GetAllProductsService } from 'src/app/shared/Services/Products/Get All Products/get-all-products.service';
+// import { GetAllProductsService } from 'src/app/shared/Services/Products/Get All Products/get-all-products.service';
 import { HttpClient } from '@angular/common/http'
-import { AddtoCartService } from '../../shared/Services/addto-cart.service'
-import { SubjectDataService } from 'src/app/shared/Services/subject-data.service';
-import {UpdateService} from "../../shared/Services/Update Services/update.service"
+// import { AddtoCartService } from '../../shared/Services/addto-cart.service'
+// import { SubjectDataService } from 'src/app/shared/Services/subject-data.service';
+// import {UpdateService} from "../../shared/Services/Update Services/update.service"
 @Component({
   selector: 'app-viewitems',
   templateUrl: './viewitems.component.html',
@@ -29,11 +29,12 @@ export class ViewitemsComponent implements OnInit {
 
   constructor(private router: Router,
     private actRouter: ActivatedRoute,
-    private service_products: GetAllProductsService,
+    // private service_products: GetAllProductsService,
     private httpost: HttpClient,
-    private addService: AddtoCartService,
-    private subService: SubjectDataService,
-    private putService: UpdateService) {
+    // private addService: AddtoCartService,
+    // private subService: SubjectDataService,
+    //  private putService: UpdateService
+     ) {
 
 
 
@@ -43,7 +44,7 @@ export class ViewitemsComponent implements OnInit {
 
     // this.actRouter.paramMap.subscribe((param) => {
     //   this.id = +param.get("id");
-    //   //alert(this.id)
+      //alert(this.id)
     //   let path = "http://localhost:4000/api/unlimitedlist/";
     //   let para = this.id;
     //   let url = path.concat(para);
@@ -59,35 +60,36 @@ export class ViewitemsComponent implements OnInit {
     //   })
     // });
 
-    this.Iproduct.push(this.service_products.currProduct)
-    this.cartItem = this.Iproduct[0];
-        // console.log(this.cartItem)
-        this.modelTitle = this.cartItem.name;
-        this.price = this.cartItem.price;
-        this.onOffer = this.cartItem.priceOnOffer;
-        this.qty = this.cartItem.quality;
-        this.model_box = false;
-  }
+  //   this.Iproduct.push(this.service_products.currProduct)
+  //   this.cartItem = this.Iproduct[0];
+  //       // console.log(this.cartItem)
+  //       this.modelTitle = this.cartItem.name;
+  //       this.price = this.cartItem.price;
+  //       this.onOffer = this.cartItem.priceOnOffer;
+  //       this.qty = this.cartItem.quality;
+  //       this.model_box = false;
+  // }
 
 
-  addToCart() {
-    let user = JSON.parse(localStorage.getItem("user"));
-    let update_data = [this.cartItem,user];
+  // addToCart() {
+  //   let user = JSON.parse(localStorage.getItem("user"));
+  //   let update_data = [this.cartItem,user];
     
-    let _url = "http://localhost:4000/api/userCart"
-    this.putService._UpdateService(_url,update_data).subscribe((res)=>{
-      //$("#modelSucc").modal('show');
+  //   let _url = "http://localhost:4000/api/userCart"
+  //   this.putService._UpdateService(_url,update_data).subscribe((res)=>{
+  //     //$("#modelSucc").modal('show');
       
-    },(err)=>{
-      $("#modelSucc").modal('show');
-    })
-  }
+  //   },(err)=>{
+  //     $("#modelSucc").modal('show');
+  //   })
+  // }
 
-  showCart() {
-    this.router.navigate(["cart"]);
-    // Bootstrap model
-    $("#modelErr").modal('hide');
-    $("#modelSucc").modal('hide');
+  // showCart() {
+  //   this.router.navigate(["cart"]);
+  //   // Bootstrap model
+  //   $("#modelErr").modal('hide');
+  //   $("#modelSucc").modal('hide');
 
-  }
+  // }
+}
 }

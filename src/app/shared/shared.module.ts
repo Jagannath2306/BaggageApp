@@ -1,15 +1,11 @@
 import { NgModule } from '@angular/core';
-import { HttpClientModule , HTTP_INTERCEPTORS} from '@angular/common/http';
-
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { NotifierModule, NotifierOptions } from 'angular-notifier';
 import { InputButtomBorderedDirective } from './Shared Directives/input-buttom-bordered.directive';
-import { GetAllProductsService } from './Services/Products/Get All Products/get-all-products.service';
-import { UserAuthService } from './User Auth/user-auth.service';
-import { AuthGuard } from './Auth Guard/auth.guard';
-import { TokenInterceptorService } from './Token intercepter/token-interceptor.service';
-import { UpdateService } from './Services/Update Services/update.service';
-
-
+import { HttpService } from './services/http-service'
+import { ApiService } from './services/api-service';
+// import { TokenInterceptorService } from './Token intercepter/token-interceptor.service';
 
 
 
@@ -23,15 +19,13 @@ import { UpdateService } from './Services/Update Services/update.service';
     InputButtomBorderedDirective
   ],
   providers: [
-    GetAllProductsService,
-    UserAuthService,
-    AuthGuard,
-    UpdateService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass:TokenInterceptorService,
-      multi:true
-    }
+    HttpService,
+    ApiService
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass:TokenInterceptorService,
+    //   multi:true
+    // }
   ]
 })
 export class SharedModule { }

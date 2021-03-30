@@ -1,22 +1,20 @@
 import { Component } from '@angular/core';
-import { UserAuthService } from 'src/app/shared/User Auth/user-auth.service';
 import { Router } from '@angular/router';
-import { SubjectDataService } from 'src/app/shared/Services/subject-data.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { GetSingleItemService } from 'src/app/shared/Services/Products/Get All Products/get-single-item.service';
+import { NotificationService } from 'src/app/Notification/notification-service';
+import { ApiService } from 'src/app/shared/services/api-service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent { 
+export class LoginComponent {
 
-  constructor(private _auth: UserAuthService,
-    private router: Router,
-    private subService: SubjectDataService,
+  constructor(private router: Router,
     private fb: FormBuilder,
-    private singleItem: GetSingleItemService) {
+    private apiService: ApiService,
+    private notificationService: NotificationService) {
   }
 
   userInfo: any;
@@ -35,28 +33,16 @@ export class LoginComponent {
     return this.userLoginForm.get('password');
   }
   ngOnInit() {
-
-
   }
 
   LoginUser() {
-
     if (this.userLoginForm.valid) {
-      this._auth.validateUser(this.userLoginForm.value).subscribe((res) => {
-        localStorage.setItem('token', res.token);
-        localStorage.setItem('user', JSON.stringify(this.userLoginForm.value));
-        this.router.navigate(['home']);
-
-        // getting user name for display in header start
-        let data = this.userLoginForm.value;
-        this.singleItem.getSingleItem(data).subscribe((res: any) => {
-          this.subService.updateName(res.user.name);
-        });
-      })
-        // getting user name for display in header end
-        , (err) => {
-        this.isSubmitted = !this.isSubmitted;
-        };
+      this.apiService.login(this.userLoginForm.value).subscribe((res) => {
+        console.log(res)
+        this.notificationService.showNotification("success", "Successfully Loggedin..!!")
+      }, (error) => {
+        
+      });
     } else {
       Object.keys(this.userLoginForm.controls).forEach(field => {
         const control = this.userLoginForm.get(field);
@@ -64,5 +50,5 @@ export class LoginComponent {
       });
     }
   }
-
+ 
 }

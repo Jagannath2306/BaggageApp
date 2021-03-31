@@ -5,24 +5,31 @@ import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { LogOutComponent } from './log-out/log-out.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AuthGuard } from '../shared/guards/auth-guard';
+import { AnonGuard } from '../shared/guards/anon-guard';
 
 
 const routes: Routes = [
     {
         path: '', component: LoginComponent,
+        canActivate: [AnonGuard]
      },
      
     {
-        path:"signup", component: SignUpComponent
+        path: "signup", component: SignUpComponent,
+        canActivate: [AnonGuard]
     },
     {
-        path:"logout", component: LogOutComponent
+        path: "logout", component: LogOutComponent,
+        canActivate: [AuthGuard]
     },
     {
-        path:"forgot-Password", component: ForgotPasswordComponent
+        path: "forgot-Password", component: ForgotPasswordComponent,
+        canActivate: [AnonGuard]
     },
     {
-        path:"profile", component: ProfileComponent
+        path: "profile", component: ProfileComponent,
+        canActivate: [AuthGuard]
     }
    
 ];

@@ -5,6 +5,8 @@ import { NotifierModule, NotifierOptions } from 'angular-notifier';
 import { InputButtomBorderedDirective } from './Shared Directives/input-buttom-bordered.directive';
 import { HttpService } from './services/http-service'
 import { ApiService } from './services/api-service';
+import { AuthGuard } from './guards/auth-guard';
+import { AnonGuard } from './guards/anon-guard';
 // import { TokenInterceptorService } from './Token intercepter/token-interceptor.service';
 
 
@@ -20,7 +22,9 @@ import { ApiService } from './services/api-service';
   ],
   providers: [
     HttpService,
-    ApiService
+    ApiService,
+    AuthGuard,
+    AnonGuard
     // {
     //   provide: HTTP_INTERCEPTORS,
     //   useClass:TokenInterceptorService,

@@ -9,8 +9,6 @@ import { NotificationService } from 'src/app/Notification/notification-service';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
-
-
   userInfo: any;
   userRegistrationForm: FormGroup;
   isSubmitted: boolean;

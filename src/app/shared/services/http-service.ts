@@ -19,9 +19,14 @@ export class HttpService {
     post(url: string, body: User): Observable<any> {
         return this.httpClient.post<User>(this.baseURL + url, body,).pipe(catchError(this.errorHandler.bind(this)));
     }
+    
+    patch(url: string, body: User): Observable<any> {
+        return this.httpClient.patch<User>(this.baseURL + url, body,).pipe(catchError(this.errorHandler.bind(this)));
+    }
 
     private errorHandler(res: any) {
         const error = res.error;
+        console.log(error);
         const keys = Object.keys(error);
         const key = keys[0];
         let message = error[key];

@@ -37,9 +37,9 @@ export class LoginComponent {
 
   LoginUser() {
     if (this.userLoginForm.valid) {
-      this.apiService.login(this.userLoginForm.value).subscribe((res) => {
-        console.log(res)
+      this.apiService.loginAndSetToken(this.userLoginForm.value).subscribe((res) => {
         this.notificationService.showNotification("success", "Successfully Loggedin..!!")
+        this.router.navigate(['home']);
       }, (error) => {
         
       });

@@ -4,6 +4,8 @@ import { catchError } from "rxjs/operators";
 import { NotificationService } from 'src/app/Notification/notification-service';
 import { Observable, throwError } from 'rxjs'
 import { User } from "../models/User";
+import { ApiService } from "./api-service";
+import { AuthUtils } from "../utility/auth-utils";
 @Injectable()
 export class HttpService {
     private baseURL = "http://localhost:4000/api"
@@ -11,19 +13,24 @@ export class HttpService {
         private notificationService: NotificationService) {
     }
 
-    get(url: string, paramData?: any): Observable<any> {
-        const data = { params: paramData };
-        return this.httpClient.get(this.baseURL + url, data).pipe(catchError(this.errorHandler.bind(this)));
+    get(url: string, param?: any): Observable<any> {
+        const paramData = { params: param, headers: this.getAuthHeaders() };
+        return this.httpClient.get(this.baseURL + url, paramData).pipe(catchError(this.errorHandler.bind(this)));
     }
 
     post(url: string, body: User): Observable<any> {
-        return this.httpClient.post<User>(this.baseURL + url, body,).pipe(catchError(this.errorHandler.bind(this)));
+        return this.httpClient.post<User>(this.baseURL + url, body, { headers: this.getAuthHeaders() }).pipe(catchError(this.errorHandler.bind(this)));
     }
     
     patch(url: string, body: User): Observable<any> {
-        return this.httpClient.patch<User>(this.baseURL + url, body,).pipe(catchError(this.errorHandler.bind(this)));
+        return this.httpClient.patch<User>(this.baseURL + url, body, { headers: this.getAuthHeaders() }).pipe(catchError(this.errorHandler.bind(this)));
     }
 
+    private getAuthHeaders() {
+        return {
+            Authorization: `Bearer ${AuthUtils.getAuthToken()}`
+        }
+    }
     private errorHandler(res: any) {
         const error = res.error;
         console.log(error);
@@ -37,7 +44,6 @@ export class HttpService {
         }
         if (error[key] instanceof Array) {
             message = error[key][0];
-            console.log(message)
         }
         if (key === 'isTrusted') {
             this.notificationService.showNotification("error", 'Please check you internet connection..!!');

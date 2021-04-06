@@ -34,7 +34,7 @@ export class SignUpComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       phone: ['',],
-      dateofbirth: ['',],
+      dateOfBirth: [null,],
       address:["",],
       cart:["",],
       history:["",],
@@ -44,9 +44,11 @@ export class SignUpComponent implements OnInit {
   }
 
   RegisterUser() {
+    console.log(this.userRegistrationForm.value)
     if (this.userRegistrationForm.valid) {
       this.apiService.signup(this.userRegistrationForm.value).subscribe((res) => {
         this.notificationService.showNotification("success", "You have successfully signed up");
+        console.log(res);
         this.router.navigate(['user']);
         }, (error) => {
         this.isSubmitted = !this.isSubmitted;

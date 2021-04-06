@@ -36,7 +36,7 @@
             id="Profile" placeholder="">
         </div>
       </div>
-      <div class="col-sm-4">
+      <div class="col-sm-4 margin-top-sm">
         <button class="btn btn-subscribe form-control btn-shutter margin-top-sm pull-right" type="submit">Upload</button>
       </div>
     </div>
@@ -47,7 +47,7 @@
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <label for="Name">* Name </label>
+          <label for="Name">Name </label>
           <input appInputButtomBordered type="text" formControlName="name" autocomplete="off"
             class="form-control form-input login-input"
             id="Name" placeholder="Name">
@@ -55,35 +55,35 @@
       </div>
       <div class="col-sm-6">
         <div class="form-group">
-          <label for="D_lname">* Email</label>
+          <label for="D_lname">Email</label>
           <input appInputButtomBordered type="text" formControlName="email" autocomplete="off"
             class="form-control form-input login-input"
-            id="Email" placeholder="Email">
+            id="Email" placeholder="Email" [attr.disabled]="true">
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <label for="D_email">* Password</label>
+          <label for="D_email">Password</label>
           <input appInputButtomBordered type="password" formControlName="password" autocomplete="off"
             class="form-control form-input login-input"
-            id="Password" placeholder="Password">
+            id="Password" placeholder="Password" [attr.disabled]="true">
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
-          <label for="D_phone">* Date Of Birth</label>
-          <input appInputButtomBordered type="date" formControlName="dateofbirth" autocomplete="off"
-            class="form-control form-input login-input" id="dateofbirth" placeholder="DD/MM/YYYY"
-            value="{{ userRegistrationForm.get('dateofbirth').value | date:'yyyy-MM-dd' }}">
+          <label for="D_phone">Date Of Birth</label>
+          <input appInputButtomBordered type="date" formControlName="dateOfBirth" autocomplete="off"
+            class="form-control form-input login-input" id="dateofbirth" placeholder="MM/DD/YYYY"
+            value="{{ userRegistrationForm.get('dateOfBirth').value | date:'yyyy-MM-dd' }}">
           </div>
           </div>
           </div>
           <div class="row">
             <div class="col-sm-6">
               <div class="form-group">
-            <label for="D_phone">* Phone</label>
+            <label for="D_phone">Phone</label>
             <input appInputButtomBordered type="text" formControlName="phone" autocomplete="off"
               class="form-control form-input                                                                                                                  login-input"
               id="D_phone" placeholder="Phone No">
@@ -96,13 +96,14 @@
         <div formArrayName="address">
           <div *ngFor="let address of address.controls; let i=index">
             <div class="form-group" [formGroupName]="i">
-              <label for="address">* Delivery Address</label>
+              <label for="address">Delivery Address</label>
               <input appInputButtomBordered type="text" formControlName="address"
                 class="form-control form-input                                                                                  login-input"
                 id="address" placeholder="address">
             </div>
           </div>
-          <a (click)="addAddress()" class="pointer pull-right">Add Address <span class="glyphicon glyphicon-plus"></span></a>
+          <a (click)="addAddress()" class="pointer pull-left margin-top-sm">Add Address <span
+              class="glyphicon glyphicon-plus"></span></a>
         </div>
       </div>
     </div>
@@ -115,44 +116,3 @@
 </div>
 
 <!-- Edit profile section end here -->
-
-<!-- Error model -->
-<div class="row text-center" style="display:
- block;">
-  <div class="modal fade modalDialogb" id="modelErr" tabindex="-1" role="dialogb" aria-labelledby="modalLabelb">
-    <div class="modal-dialog_a modal-lg">
-      <div class="modal-content_b">
-        <div class="modal-body_b">
-          <div class="row">
-            <div class="col-sm-12">
-              <h2>Something Went Wrong....</h2>
-            </div>
-            <div class="col-sm-12">
-              <button class="btn-custom-error" data-dismiss="modal">Ok</button>
-            </div>
-          </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-<!-- Success model -->
-<div class="row  text-center">
-  <div class="modal fade modalDialogA" id="modelSucc" tabindex="-1" role="dialogA" aria-labelledby="modalLabelA">
-    <div class="modal-dialog_a modal-md">
-      <div class="modal-content_a">
-        <div class="modal-body_a">
-          <div class="row">
-            <div class="col-sm-12">
-              <h2>Your Profile has been Updated Successfully</h2>
-            </div>
-            <div class="col-sm-12 text-center">
-              <!-- <button class="btn-custom-success pull-right" (click)="showCart()">GO TO CART</button> -->
-              <button class="btn-custom-success" data-dismiss="modal">Ok</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>

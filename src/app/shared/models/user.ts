@@ -3,10 +3,11 @@ export interface User {
     name: String,
     email: String,
     password: String,
-    phone: [],
-    address: [],
-    cart: [],
-    history: [],
-    cards: [],
+    phone: Number,
+    dateOfBirth: Date,
+    address: Array<any>,
+    cart: Array<any>,
+    history: Array<any>,
+    cards: Array<any>,
     profileImg: String
 }

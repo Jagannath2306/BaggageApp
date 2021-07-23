@@ -13,8 +13,8 @@ const routes: Routes = [
     {
         path: '', component: LoginComponent,
         canActivate: [AnonGuard]
-     },
-     
+    },
+
     {
         path: "signup", component: SignUpComponent,
         canActivate: [AnonGuard]
@@ -31,7 +31,7 @@ const routes: Routes = [
         path: "profile", component: ProfileComponent,
         canActivate: [AuthGuard]
     }
-   
+
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forChild(routes);

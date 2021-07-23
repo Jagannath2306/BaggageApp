@@ -7,13 +7,11 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 
 const routes: Routes = [
     {
-        path: '', component: AboutUsComponent,
-        canActivate: [AnonGuard]
+        path: '', component: AboutUsComponent
     },
 
     {
-        path: "contact-us", component: ContactUsComponent,
-        canActivate: [AnonGuard]
+        path: "contact-us", component: ContactUsComponent
     }
 ];
 

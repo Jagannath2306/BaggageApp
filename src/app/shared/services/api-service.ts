@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { letProto } from "rxjs-compat/operator/let";
 import { root } from "rxjs/internal-compatibility";
 import { map } from "rxjs/operators";
 import { User } from "../models/User";
@@ -10,7 +11,7 @@ import { HttpService } from "./http-service";
 export class ApiService {
     constructor(private httpService: HttpService) {
     }
-  
+
     signup(body: any): Observable<User> {
         return this.httpService.post("/user/signup", body);
     }
@@ -21,7 +22,9 @@ export class ApiService {
             return res.user;
         }));
     }
-
+    logoutAndRemoveToken(param?: any) {
+        AuthUtils.removeAuthToken(param);
+    }
     sendResetPasswordEmail(param?: any): Observable<any> {
         return this.httpService.get("/user/reset/password", param);
     }
@@ -34,7 +37,9 @@ export class ApiService {
     }
 
     updateProfilePicture(body: any): Observable<any> {
-        return this.httpService.patch("/user/update/profilePic", body);
+        let formData: any = new FormData();
+        formData.append('profilePhoto', body);
+        return this.httpService.patch("/user/update/profilePic", formData);
     }
 
     fatchUser(param?: any): Observable<User> {

@@ -6,12 +6,17 @@
   </div>
   <div class="row">
     <div class="col-md-3 col-sm-3 col-xs-12">
-      <img src="https://www.jamf.com/jamf-nation/img/default-avatars/generic-user-purple.png" height="120"
-        class="rounded-circle center-block profile-picture">
+      <img src="{{loggedUser?.profilePhoto ? loggedUser.profilePhoto : './../../../assets/default-user.png' }}"
+        height="120" class="rounded-circle center-block profile-picture cur-p" (click)="fileupload.click()">
+      <form role=" form" [formGroup]="profileForm" (ngSubmit)="profileSubmit()" action="/uploadphoto" method="POST"
+        enctype="multipart/form-data">
+        <input #fileupload (change)="onFileSelected($event)" type="file" hidden name="profileImg"
+          formControlName="profilePhoto" style="visibility: hidden;">
+        <button class="btn btn-primary btn-sm upload-btn" *ngIf="isFile">Upload</button>
+      </form>
     </div>
     <div class="col-md-9 col-sm-9 col-xs-12 content-box">
-      <span class="profile-name">Welcome Mr. <strong>{{singleUsertitle | uppercase}}</strong> </span><sup
-        class="label label-success member">P</sup>
+      <span class="profile-name">Welcome Mr. <strong>{{loggedUser.name | uppercase}}</strong> </span>
       <span class="pull-right"><a class="pointer" id="edit-Profile" (click)="editProfile()"><span
             class="glyphicon glyphicon-edit"></span>
           Edit
@@ -23,42 +28,24 @@
 <div class="container">
 </div>
 <!-- Edit profile section start here -->
-<div class="container margin-top-lg d-none" id="profile-form">
-  <form role="form" [formGroup]="profileForm" (ngSubmit)="profileSubmit()" action="/uploadphoto" method="POST"
-    enctype="multipart/form-data">
-    <div class="row">
-      <div class="col-sm-8">
-        <div class="form-group">
-          <label for="Profile">Upload Profile Image</label>
-          <input appInputButtomBordered #fileupload (change)="getImage($event)" type="file" name="profileImg"
-            formControlName="profileImg" autocomplete="off" accept="image/*"
-            class="form-control form-input                                                                                                                  login-input"
-            id="Profile" placeholder="">
-        </div>
-      </div>
-      <div class="col-sm-4 margin-top-sm">
-        <button class="btn btn-subscribe form-control btn-shutter margin-top-sm pull-right" type="submit">Upload</button>
-      </div>
-    </div>
-  </form>
-  
-  <form role="form" [formGroup]="userRegistrationForm" (ngSubmit)="submitForm()" action="/singleUserUpdate" method="POST"
-    enctype="multipart/form-data">
+<div class="container d-none" id="profile-form">
+
+
+  <form role="form" [formGroup]="userRegistrationForm" (ngSubmit)="submitForm()" action="/singleUserUpdate"
+    method="POST" enctype="multipart/form-data">
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
           <label for="Name">Name </label>
           <input appInputButtomBordered type="text" formControlName="name" autocomplete="off"
-            class="form-control form-input login-input"
-            id="Name" placeholder="Name">
+            class="form-control form-input login-input" id="Name" placeholder="Name">
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
           <label for="D_lname">Email</label>
           <input appInputButtomBordered type="text" formControlName="email" autocomplete="off"
-            class="form-control form-input login-input"
-            id="Email" placeholder="Email" [attr.disabled]="true">
+            class="form-control form-input login-input" id="Email" placeholder="Email" [attr.disabled]="true">
         </div>
       </div>
     </div>
@@ -67,8 +54,7 @@
         <div class="form-group">
           <label for="D_email">Password</label>
           <input appInputButtomBordered type="password" formControlName="password" autocomplete="off"
-            class="form-control form-input login-input"
-            id="Password" placeholder="Password" [attr.disabled]="true">
+            class="form-control form-input login-input" id="Password" placeholder="Password" [attr.disabled]="true">
         </div>
       </div>
       <div class="col-sm-6">
@@ -77,21 +63,21 @@
           <input appInputButtomBordered type="date" formControlName="dateOfBirth" autocomplete="off"
             class="form-control form-input login-input" id="dateofbirth" placeholder="MM/DD/YYYY"
             value="{{ userRegistrationForm.get('dateOfBirth').value | date:'yyyy-MM-dd' }}">
-          </div>
-          </div>
-          </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <div class="form-group">
-            <label for="D_phone">Phone</label>
-            <input appInputButtomBordered type="text" formControlName="phone" autocomplete="off"
-              class="form-control form-input                                                                                                                  login-input"
-              id="D_phone" placeholder="Phone No">
-          </div>
         </div>
+      </div>
     </div>
-  
-      <div class="row">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="D_phone">Phone</label>
+          <input appInputButtomBordered type="text" formControlName="phone" autocomplete="off"
+            class="form-control form-input                                                                                                                  login-input"
+            id="D_phone" placeholder="Phone No">
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
       <div class="col-sm-12">
         <div formArrayName="address">
           <div *ngFor="let address of address.controls; let i=index">
@@ -103,16 +89,17 @@
             </div>
           </div>
           <a (click)="addAddress()" class="pointer pull-left margin-top-sm">Add Address <span
-              class="glyphicon glyphicon-plus"></span></a>
+              class=" glphicon glyphicon-plus"></span></a>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-3 col-sm-offset-9">
-        <button class="btn btn-subscribe form-control btn-shutter margin-top-sm pull-right" type="submit">Update</button>
+        <button class="btn btn-subscribe form-control btn-shutter margin-top-sm pull-right"
+          type="submit">Update</button>
       </div>
     </div>
-    </form>
+  </form>
 </div>
 
 <!-- Edit profile section end here -->

@@ -6,10 +6,13 @@
     width: 100%;
 }
 .profile-picture{
-    position: absolute;
-    top: -65px;
-    left: 83px;
-    z-index: 100;
+  position: absolute;
+  top: -65px;
+  left: 83px;
+  z-index: 100;
+  border-radius: 50%;
+  height: 100px;
+  width: 100px;
 }
 .panel-heading{
     font-weight: 500;
@@ -238,4 +241,12 @@ sup{
     .nav-tabs > li {
       width: 50%;
     }
+  }
+  .upload-btn{
+    margin-top: 50px;
+    margin-left: 80px;
+  }
+
+  .cur-p {
+    cursor: pointer;
   }

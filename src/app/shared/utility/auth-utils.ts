@@ -7,8 +7,8 @@ export class AuthUtils {
     static setAuthToken(token) {
         localStorage.setItem(AuthUtils.authToken, token);
     }
-    static removeAuthToken() {
-        localStorage.removeItem(AuthUtils.authToken);
+    static removeAuthToken(token) {
+        localStorage.removeItem(token);
     }
 
 }

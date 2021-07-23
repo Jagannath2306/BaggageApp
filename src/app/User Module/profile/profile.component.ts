@@ -1,11 +1,12 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { combineLatest } from 'rxjs';
 import { NotificationService } from 'src/app/Notification/notification-service';
 import { ApiService } from 'src/app/shared/services/api-service';
-// import { PostServicesService } from 'src/app/shared/Services/Post Services/post-services.service';
-// import { GetSingleItemService } from 'src/app/shared/Services/Products/Get All Products/get-single-item.service';
-// import { SubjectDataService } from 'src/app/shared/Services/subject-data.service';
-// import { UpdateService } from 'src/app/shared/Services/Update Services/update.service';
+import { getUserLoaded, getUserLoading } from 'src/app/State Management/reducers';
+import { UserRequestAction, UserSuccessAction } from 'src/app/State Management/actions/user-action';
+import { getUserdata, RootReducerState } from 'src/app/State Management/reducers';
 
 @Component({
   selector: 'app-profile',
@@ -14,10 +15,13 @@ import { ApiService } from 'src/app/shared/services/api-service';
 })
 export class ProfileComponent implements OnInit {
   loggedUser;
+  selectedFile: File;
+  isFile = false;
   constructor(
     private fb: FormBuilder,
     private apiService: ApiService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private store: Store<RootReducerState>
   ) { }
 
   userRegistrationForm = this.fb.group({
@@ -26,20 +30,27 @@ export class ProfileComponent implements OnInit {
     password: ['', [Validators.required, Validators.minLength(8)]],
     dateOfBirth: ['', [Validators.required]],
     phone: ['', [Validators.required, Validators.minLength(10)]],
-    profileImg: ['',],
     address: this.fb.array([]),
   });
   profileForm = this.fb.group({
-    profileImg: ['',]
+    profilePhoto: ['',]
   });
 
 
   ngOnInit() {
-    this.apiService.fatchUser().subscribe((res) => {
-      this.loggedUser = res;
-    }, (err) => {
-      
+    const loading$ = this.store.select(getUserLoading);
+    const loaded$ = this.store.select(getUserLoaded);
+    combineLatest([loading$, loaded$]).subscribe((data) => {
+      if (!data[0] && !data[1]) {
+        this.store.dispatch(new UserRequestAction());
+        this.apiService.fatchUser().subscribe((res) => {
+          this.store.dispatch(new UserSuccessAction(res));
+        });
+      }
     })
+    this.store.select(getUserdata).subscribe((getStoreData) => {
+      this.loggedUser = getStoreData;
+    });
   }
 
   get address() {
@@ -68,11 +79,13 @@ export class ProfileComponent implements OnInit {
 
   submitForm() {
     if (this.userRegistrationForm.value) {
-      console.log(this.userRegistrationForm.value);
       this.apiService.updateProfile(this.userRegistrationForm.value).subscribe((res) => {
+        this.apiService.fatchUser().subscribe((res) => {
+          this.store.dispatch(new UserSuccessAction(res));
+        });
         this.notificationService.showNotification("success", "Your Profile has been Updated successfully..!!");
       }, (err) => {
-      
+
       })
     }
 
@@ -82,23 +95,25 @@ export class ProfileComponent implements OnInit {
     this.setControlValues(this.loggedUser);
   }
 
-  @ViewChild('fileupload') fileupload: ElementRef;
-
-  getImage(evt) {
+  // @ViewChild('fileupload') fileupload: ElementRef;
+  //////////////////// or //////////////////////////
+  onFileSelected(evt) {
     if (evt.target.files && evt.target.files[0]) {
-      const render = new FileReader();
-      render.onload = (event: ProgressEvent) => {
-        console.log(event)
-      }
+      this.isFile = true;
+      this.selectedFile = evt.target.files[0]
     }
   }
 
   profileSubmit() {
-    const data = Object.assign({}, { "profilePhoto": this.fileupload.nativeElement.files[0].name })
-    console.log(data)
-    this.apiService.updateProfilePicture(data).subscribe((res) => {
-      console.log(res)
-    }, (err) => { })
-    // this.userUpdate._updateUserProfile(data, this.fileupload.nativeElement.files[0]).subscribe((res) => {
+    this.apiService.updateProfilePicture(this.selectedFile).subscribe((res) => {
+      this.isFile = false;
+      this.apiService.fatchUser().subscribe((res) => {
+        this.store.dispatch(new UserSuccessAction(res));
+      });
+      this.notificationService.showNotification("success", "Your Profile Image has been Updated Successfully..!!")
+    }, (err) => {
+      this.isFile = true;
+    })
+    // this.apiService.updateProfilePicture(this.fileupload.nativeElement.files[0]).subscribe((res) => {
   }
-  }
+}

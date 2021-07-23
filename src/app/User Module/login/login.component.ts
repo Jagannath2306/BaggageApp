@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { NotificationService } from 'src/app/Notification/notification-service';
 import { ApiService } from 'src/app/shared/services/api-service';
+import { Store } from '@ngrx/store';
+import { getUserdata, RootReducerState } from 'src/app/State Management/reducers';
+import { UserSuccessAction } from 'src/app/State Management/actions/user-action';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +17,9 @@ export class LoginComponent {
   constructor(private router: Router,
     private fb: FormBuilder,
     private apiService: ApiService,
-    private notificationService: NotificationService) {
+    private notificationService: NotificationService,
+    private store: Store<RootReducerState>
+  ) {
   }
 
   userInfo: any;
@@ -40,8 +45,12 @@ export class LoginComponent {
       this.apiService.loginAndSetToken(this.userLoginForm.value).subscribe((res) => {
         this.notificationService.showNotification("success", "Successfully Loggedin..!!")
         this.router.navigate(['home']);
+        this.store.dispatch(new UserSuccessAction(res));
+        this.store.select(getUserdata).subscribe((getStoreData) => {
+          console.log(getStoreData);
+        });
       }, (error) => {
-        
+
       });
     } else {
       Object.keys(this.userLoginForm.controls).forEach(field => {
@@ -50,5 +59,5 @@ export class LoginComponent {
       });
     }
   }
- 
+
 }

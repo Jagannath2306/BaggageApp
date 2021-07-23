@@ -16,8 +16,10 @@ import { NotifierModule, NotifierOptions } from 'angular-notifier';
 import { SpinnerComponent } from './Home Module/spinner/spinner.component';
 import * as bootstrap from "bootstrap";
 import * as $ from "jquery";
+import { StoreModule } from '@ngrx/store';
+import { rootReducer } from 'src/app/State Management/reducers';
 
-declare var thirdLib:any;
+declare var thirdLib: any;
 
 /**
  * Custom angular notifier options
@@ -70,13 +72,14 @@ const customNotifierOptions: NotifierOptions = {
     HeaderComponent,
     FooterComponent,
     PageNotFoundComponent,
-    SpinnerComponent    
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
     routing,
     SharedModule,
-    NotifierModule.withConfig(customNotifierOptions)
+    NotifierModule.withConfig(customNotifierOptions),
+    StoreModule.forRoot(rootReducer)
   ],
   providers: [NotificationService],
   bootstrap: [AppComponent]

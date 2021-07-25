@@ -16,7 +16,7 @@ export class UserRepository {
     getLogedUser(force = false): Observable<any> {
         const loading$ = this.store.select(getUserLoading);
         const loaded$ = this.store.select(getUserLoaded);
-        const getUserData = this.store.select(getUserdata);
+        const getUserData$ = this.store.select(getUserdata);
         combineLatest([loading$, loaded$]).subscribe((data) => {
             if (!data[0] && !data[1] || force) {
                 this.store.dispatch(new UserRequestAction());
@@ -25,6 +25,6 @@ export class UserRepository {
                 });
             }
         });
-        return getUserData;
+        return getUserData$;
     }
 }

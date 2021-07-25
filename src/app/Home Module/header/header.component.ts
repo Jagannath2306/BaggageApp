@@ -7,6 +7,7 @@ import { combineLatest } from 'rxjs';
 // import { UserAuthService } from '../../shared/User Auth/user-auth.service';
 // import { GetSingleItemService } from 'src/app/shared/Services/Products/Get All Products/get-single-item.service';
 import { NotificationService } from 'src/app/Notification/notification-service';
+import { UserRepository } from 'src/app/shared/Repositories/User-repo';
 import { ApiService } from 'src/app/shared/services/api-service';
 import { UserRequestAction, UserSuccessAction } from 'src/app/State Management/actions/user-action';
 import { getUserdata, getUserLoaded, getUserLoading, getUserState, RootReducerState } from 'src/app/State Management/reducers';
@@ -22,23 +23,12 @@ export class HeaderComponent implements OnInit {
   loggedUser: any;
   isUserlogged = false;
   constructor(
-    private apiService: ApiService,
-    private notificationService: NotificationService,
-    private store: Store<RootReducerState>
+    private userRepo: UserRepository,
+    private notificationService: NotificationService
   ) { }
 
   ngOnInit() {
-    const loading$ = this.store.select(getUserLoading);
-    const loaded$ = this.store.select(getUserLoaded);
-    combineLatest([loading$, loaded$]).subscribe((data) => {
-      if (!data[0] && !data[1]) {
-        this.store.dispatch(new UserRequestAction());
-        this.apiService.fatchUser().subscribe((res) => {
-          this.store.dispatch(new UserSuccessAction(res));
-        });
-      }
-    })
-    this.store.select(getUserdata).subscribe((getStoreData) => {
+    this.userRepo.getLogedUser().subscribe((getStoreData) => {
       if (Object.keys(getStoreData).length === 0 && getStoreData.constructor === Object) {
         this.isUserlogged = false;
       }

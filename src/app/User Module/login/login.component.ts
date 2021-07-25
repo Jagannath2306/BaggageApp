@@ -46,9 +46,6 @@ export class LoginComponent {
         this.notificationService.showNotification("success", "Successfully Loggedin..!!")
         this.router.navigate(['home']);
         this.store.dispatch(new UserSuccessAction(res));
-        this.store.select(getUserdata).subscribe((getStoreData) => {
-          console.log(getStoreData);
-        });
       }, (error) => {
 
       });

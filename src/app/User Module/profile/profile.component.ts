@@ -1,12 +1,11 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { combineLatest } from 'rxjs';
 import { NotificationService } from 'src/app/Notification/notification-service';
 import { ApiService } from 'src/app/shared/services/api-service';
-import { getUserLoaded, getUserLoading } from 'src/app/State Management/reducers';
 import { UserRequestAction, UserSuccessAction } from 'src/app/State Management/actions/user-action';
 import { getUserdata, RootReducerState } from 'src/app/State Management/reducers';
+import { UserRepository } from 'src/app/shared/Repositories/User-repo';
 
 @Component({
   selector: 'app-profile',
@@ -21,7 +20,8 @@ export class ProfileComponent implements OnInit {
     private fb: FormBuilder,
     private apiService: ApiService,
     private notificationService: NotificationService,
-    private store: Store<RootReducerState>
+    private store: Store<RootReducerState>,
+    private userRepo: UserRepository
   ) { }
 
   userRegistrationForm = this.fb.group({
@@ -35,35 +35,20 @@ export class ProfileComponent implements OnInit {
   profileForm = this.fb.group({
     profilePhoto: ['',]
   });
-
-
   ngOnInit() {
-    const loading$ = this.store.select(getUserLoading);
-    const loaded$ = this.store.select(getUserLoaded);
-    combineLatest([loading$, loaded$]).subscribe((data) => {
-      if (!data[0] && !data[1]) {
-        this.store.dispatch(new UserRequestAction());
-        this.apiService.fatchUser().subscribe((res) => {
-          this.store.dispatch(new UserSuccessAction(res));
-        });
-      }
-    })
-    this.store.select(getUserdata).subscribe((getStoreData) => {
+    this.userRepo.getLogedUser().subscribe((getStoreData) => {
       this.loggedUser = getStoreData;
     });
   }
-
   get address() {
     return this.userRegistrationForm.get('address') as FormArray;
   }
-
   addAddress(data) {
     this.address.push(this.fb.group({
       address: data ? data.address : ''
     }));
     return false;
   }
-
   setControlValues(user) {
     this.userRegistrationForm.patchValue({
       name: user.name,
@@ -76,7 +61,6 @@ export class ProfileComponent implements OnInit {
       this.addAddress(elm);
     })
   }
-
   submitForm() {
     if (this.userRegistrationForm.value) {
       this.apiService.updateProfile(this.userRegistrationForm.value).subscribe((res) => {
@@ -88,7 +72,6 @@ export class ProfileComponent implements OnInit {
 
       })
     }
-
   }
   editProfile() {
     $("#profile-form").toggle();
@@ -113,7 +96,6 @@ export class ProfileComponent implements OnInit {
       this.notificationService.showNotification("success", "Your Profile Image has been Updated Successfully..!!")
     }, (err) => {
       this.isFile = true;
-    })
-    // this.apiService.updateProfilePicture(this.fileupload.nativeElement.files[0]).subscribe((res) => {
+    });
   }
 }

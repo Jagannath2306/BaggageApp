@@ -7,6 +7,7 @@ import { HttpService } from './services/http-service'
 import { ApiService } from './services/api-service';
 import { AuthGuard } from './guards/auth-guard';
 import { AnonGuard } from './guards/anon-guard';
+import { UserRepository } from './Repositories/User-repo';
 // import { TokenInterceptorService } from './Token intercepter/token-interceptor.service';
 
 
@@ -23,6 +24,7 @@ import { AnonGuard } from './guards/anon-guard';
   providers: [
     HttpService,
     ApiService,
+    UserRepository,
     AuthGuard,
     AnonGuard
     // {

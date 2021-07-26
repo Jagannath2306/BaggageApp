@@ -7,6 +7,7 @@ import { LogOutComponent } from './log-out/log-out.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from '../shared/guards/auth-guard';
 import { AnonGuard } from '../shared/guards/anon-guard';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 const routes: Routes = [
@@ -29,6 +30,10 @@ const routes: Routes = [
     },
     {
         path: "profile", component: ProfileComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: "reset-password", component: ChangePasswordComponent,
         canActivate: [AuthGuard]
     }
 

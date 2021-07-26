@@ -9,10 +9,11 @@ import { LogOutComponent } from './log-out/log-out.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { SharedModule } from '../shared/shared.module';
 import { ProfileComponent } from './profile/profile.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 @NgModule({
-  declarations: [LoginComponent, SignUpComponent, LogOutComponent, ForgotPasswordComponent, ProfileComponent],
+  declarations: [LoginComponent, SignUpComponent, LogOutComponent, ForgotPasswordComponent, ProfileComponent, ChangePasswordComponent],
   imports: [
     CommonModule,
     SharedModule,

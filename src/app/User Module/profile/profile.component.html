@@ -16,20 +16,108 @@
       </form>
     </div>
     <div class="col-md-9 col-sm-9 col-xs-12 content-box">
-      <span class="profile-name">Welcome Mr. <strong>{{loggedUser.name | uppercase}}</strong> </span>
-      <span class="pull-right"><a class="pointer" id="edit-Profile" (click)="editProfile()"><span
-            class="glyphicon glyphicon-edit"></span>
-          Edit
-          Profile</a></span>
-    </div>
-  </div>
-  <hr class="margin-top">
-</div>
-<div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-5">
+          <span class="profile-name"><span class="font-14">Mr.</span> <br /> <strong class="font-20">{{loggedUser.name |
+              uppercase}}</strong>
+          </span>
+        </div>
+      </div>
+      </div>
+      </div>
+      <hr class="">
+      </div>
+      <div class="container userinfo">
+        <div class="row">
+          <div class="col-sm-12 col-md-12 col-lg-3">
+            <ul class="nav nav-pills">
+              <li class="active btn-block"><a data-toggle="pill" href="#home"> <i
+                    class="glyphicon glyphicon-user"></i>Personal
+                  Information</a></li>
+              <li class="btn-block"><a data-toggle="pill" href="#menu1"><i class="glyphicon glyphicon-time"></i>Last
+                  Transation</a></li>
+              <li class="btn-block"><a data-toggle="pill" href="#menu2"><i class="glyphicon glyphicon-list-alt"></i>Transation
+                  Histories</a></li>
+            </ul>
+          </div>
+          <div class="col-sm-12 col-md-12 col-lg-9">
+            <div class="tab-content">
+              <div id="home" class="tab-pane fade in active">
+                <div class="row">
+                  <div class="col-sm-12 col-md-12 col-lg-4">
+                    <h3 class="text-primary">Personal Information</h3>
+                  </div>
+                  <div class="col-sm-12 col-md-12 col-lg-8 text-right">
+                    <span class="vertical-align-top border-right"><a routerLink="/user/reset-password"
+                        class="pointer padding-right-2">
+                        <i class="glyphicon glyphicon-lock"></i>Change Password</a></span>
+                    <span class="vertical-align-top"><a class="pointer" id="edit-Profile" (click)="editProfile()"><span
+                          class="glyphicon glyphicon-edit"></span>Edit Profile</a></span>
+                  </div>
+                </div>
+                <span class="text-muted">You can Update you personal information by clicking the edit profile link right
+                  side.</span>
+                <hr class="">
+                <div class="row">
+                  <div class="col-sm-12 col-md-12 col-lg-10">
+                    <table class="table">
+                      <thead class="font-20">
+                        <tr>
+                          <th colspan="2">Basic Informations</th>
+                        </tr>
+                      </thead>
+                      <tbody class="font-18">
+                        <tr>
+                          <td>Name</td>
+                          <td>: &nbsp; {{loggedUser.name}}</td>
+                        </tr>
+                        <tr>
+                          <td>Email</td>
+                          <td>: &nbsp; {{loggedUser.email}}</td>
+                        </tr>
+                        <tr>
+                          <td>Password</td>
+                          <td>: &nbsp; ********</td>
+                        </tr>
+                        <tr>
+                          <td>Date Of Birth</td>
+                          <td>: &nbsp; {{loggedUser.dateOfBirth | date:"MM/dd/yyyy"}}</td>
+                        </tr>
+                        <tr>
+                          <td>Contact No</td>
+                          <td>: &nbsp; +91 {{loggedUser.phone}}</td>
+                        </tr>
+                        <ng-template ngFor let-address [ngForOf]="loggedUser.address" let-i="index">
+                          <tr>
+                            <td>Address {{i + 1}}</td>
+                            <td>: &nbsp; {{address.address}}</td>
+                          </tr>
+                        </ng-template>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div id="menu1" class="tab-pane fade">
+                <div class="row">
+                  <div class="col-sm-12 col-md-12 col-lg-4">
+                    <h3 class="text-primary">Last Transation</h3>
+                  </div>
+                </div>
+              </div>
+              <div id="menu2" class="tab-pane fade">
+                <div class="row">
+                  <div class="col-sm-12 col-md-12 col-lg-4">
+                    <h3 class="text-primary">Transation Histories</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 </div>
 <!-- Edit profile section start here -->
 <div class="container d-none" id="profile-form">
-
 
   <form role="form" [formGroup]="userRegistrationForm" (ngSubmit)="submitForm()" action="/singleUserUpdate"
     method="POST" enctype="multipart/form-data">
@@ -94,9 +182,15 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-3 col-sm-offset-9">
+      <div class="col-lg-6">
+      </div>
+      <div class="col-sm-3">
         <button class="btn btn-subscribe form-control btn-shutter margin-top-sm pull-right"
           type="submit">Update</button>
+      </div>
+      <div class="col-sm-3">
+        <a class="btn btn-subscribe form-control btn-shutter margin-top-sm pull-right padding-top-6 text-white"
+          (click)="cancle()">Cancle</a>
       </div>
     </div>
   </form>

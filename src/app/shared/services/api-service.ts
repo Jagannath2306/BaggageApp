@@ -32,6 +32,9 @@ export class ApiService {
     resetPassword(body: any): Observable<any> {
         return this.httpService.patch("/user/reset/password", body);
     }
+    updatePassword(body: any): Observable<any> {
+        return this.httpService.patch("/user/update/password", body);
+    }
     updateProfile(body: any): Observable<any> {
         return this.httpService.patch("/user/update/profile", body);
     }

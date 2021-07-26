@@ -6,11 +6,13 @@ import { Observable, throwError } from 'rxjs'
 import { User } from "../models/User";
 import { ApiService } from "./api-service";
 import { AuthUtils } from "../utility/auth-utils";
+import { Router } from "@angular/router";
 @Injectable()
 export class HttpService {
     private baseURL = "http://localhost:4000/api"
     constructor(private httpClient: HttpClient,
-        private notificationService: NotificationService) {
+        private notificationService: NotificationService,
+        private router: Router) {
     }
 
     get(url: string, param?: any): Observable<any> {
@@ -41,6 +43,8 @@ export class HttpService {
 
         if (status === 401) {
             //need to logout user , bcz section expire; and redirect to login
+            this.notificationService.showNotification("error", 'Session Expired !!');
+            this.router.navigate(['user']);
         }
         if (error[key] instanceof Array) {
             message = error[key][0];

@@ -21,9 +21,9 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12 col-sm-11 col-xs-10 col-sm-offset-1 col-xs-offset-2 flex-box-container">
+        <div class="col-md-12 ngFor let-product [ngForOf]="puma_Products" let-i="index"col-sm-11 col-xs-10 col-sm-offset-1 col-xs-offset-2 flex-box-container">
           <div class="flex-container">
-            <ng-template ngFor let-product [ngForOf]="puma_Products" let-i="index">
+            <ng-template>
               <div class="items" (click)="viewDetail(product)">
                 <img [(src)]="product.image" height="180" alt="" class="center-block">
                 <div class="product-details border-bottom margin-top-sm">

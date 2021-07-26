@@ -250,3 +250,33 @@ sup{
   .cur-p {
     cursor: pointer;
   }
+  .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+    background-color: transparent !important;
+    color: #23bab5;
+    border-left: 5px solid #23bab5;
+    border-radius: 0px;
+  }
+  .nav-pills li{
+    font-size: 16px;
+  }
+  .tab-content{
+    padding-top:0px;
+  }
+  .glyphicon{
+    padding:2%;
+  }
+  .font-14{
+    font-size: 14px;
+  }
+  .font-20{
+    font-size: 20px;
+  }
+  .vertical-align-top{
+    vertical-align: bottom;
+  }
+  .border-right{
+    border-right : 1px solid #23bab5;
+  }
+  .padding-right-2{
+    padding-right: 2%;
+  }

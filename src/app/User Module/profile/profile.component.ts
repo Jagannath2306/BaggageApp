@@ -68,6 +68,8 @@ export class ProfileComponent implements OnInit {
           this.store.dispatch(new UserSuccessAction(res));
         });
         this.notificationService.showNotification("success", "Your Profile has been Updated successfully..!!");
+        $("#profile-form").toggle();
+        $(".userinfo").toggle();
       }, (err) => {
 
       })
@@ -75,6 +77,7 @@ export class ProfileComponent implements OnInit {
   }
   editProfile() {
     $("#profile-form").toggle();
+    $(".userinfo").toggle();
     this.setControlValues(this.loggedUser);
   }
 
@@ -93,9 +96,13 @@ export class ProfileComponent implements OnInit {
       this.apiService.fatchUser().subscribe((res) => {
         this.store.dispatch(new UserSuccessAction(res));
       });
-      this.notificationService.showNotification("success", "Your Profile Image has been Updated Successfully..!!")
+      this.notificationService.showNotification("success", "Your Profile Image has been Updated Successfully..!!");
     }, (err) => {
       this.isFile = true;
     });
+  }
+  cancle() {
+    $("#profile-form").toggle();
+    $(".userinfo").toggle();
   }
 }

@@ -647,3 +647,19 @@ a{
   }
 } */
 /* Overlay End */
+
+.text-primary {
+  color: #23bab5 !important;
+}
+.padding-top-6{
+  padding-top:6% !important;
+}
+.padding-top-9{
+  padding-top:9% !important;
+}
+.text-white{
+  color:#FFFFFF !important;
+}
+.font-18{
+  font-size: 18px;
+}

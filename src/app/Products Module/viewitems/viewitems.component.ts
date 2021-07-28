@@ -1,10 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-// import { GetAllProductsService } from 'src/app/shared/Services/Products/Get All Products/get-all-products.service';
-import { HttpClient } from '@angular/common/http'
-// import { AddtoCartService } from '../../shared/Services/addto-cart.service'
-// import { SubjectDataService } from 'src/app/shared/Services/subject-data.service';
-// import {UpdateService} from "../../shared/Services/Update Services/update.service"
+import { ApiProductsService } from 'src/app/shared/services/api-products-service';
 @Component({
   selector: 'app-viewitems',
   templateUrl: './viewitems.component.html',
@@ -12,7 +8,7 @@ import { HttpClient } from '@angular/common/http'
 })
 export class ViewitemsComponent implements OnInit {
 
-  Iproduct = [];
+  product: any;
   id;
   cartItem: any;
   modelTitle: string;
@@ -25,11 +21,14 @@ export class ViewitemsComponent implements OnInit {
   count_data: any;
   model_box: boolean;
   route: any;
+  _id: any;
+  Iproduct: any;
 
-
+  myThumbnail = "https://wittlock.github.io/ngx-image-zoom/assets/thumb.jpg";
+  myFullresImage = "https://wittlock.github.io/ngx-image-zoom/assets/fullres.jpg";
   constructor(private router: Router,
     private actRouter: ActivatedRoute,
-    private httpost: HttpClient,
+    private apiProductsService: ApiProductsService,
      ) {
 
 
@@ -37,24 +36,33 @@ export class ViewitemsComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.actRouter.paramMap.subscribe((param) => {
-      this.id = +param.get("id");
-      alert(this.id)
-      let path = "http://localhost:4000/api/unlimitedlist/";
-      let para = this.id;
-      let url = path.concat(para);
-      this.service_products.getAllProducts(url).subscribe((response) => {
-        this.Iproduct = response;
-        this.cartItem = this.Iproduct[0];
-        // console.log(this.cartItem)
-        this.modelTitle = this.cartItem.name;
-        this.price = this.cartItem.price;
-        this.onOffer = this.cartItem.priceOnOffer;
-        this.qty = this.cartItem.quality;
+      this.apiProductsService.getProduct({ _id: param.get("id") }).subscribe((res) => {
+        this.product = res;
+        this.Iproduct = res;
+        this.cartItem = res;
+        console.log(this.cartItem)
+        this.modelTitle = this.cartItem.itemName;
+        this.price = this.cartItem.itemPrice;
+        this.onOffer = this.cartItem.itemPriceOnOffer;
+        this.qty = this.cartItem.itemQuality;
         this.model_box = false;
-      })
+      }, (e) => { })
     });
+    // this.actRouter.paramMap.subscribe((param) => {
+    //   this.id = +param.get("id");
+
+    //   this.service_products.getAllProducts(url).subscribe((response) => {
+    //     this.Iproduct = response;
+    //     this.cartItem = this.Iproduct[0];
+    //     // console.log(this.cartItem)
+    //     this.modelTitle = this.cartItem.name;
+    //     this.price = this.cartItem.price;
+    //     this.onOffer = this.cartItem.priceOnOffer;
+    //     this.qty = this.cartItem.quality;
+    //     this.model_box = false;
+    //   })
+    // });
 
   //   this.Iproduct.push(this.service_products.currProduct)
   //   this.cartItem = this.Iproduct[0];

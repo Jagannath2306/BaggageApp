@@ -10,7 +10,10 @@ export class ApiProductsService {
         private httpService: HttpService) {
     }
 
-    getProducts(param?: any): Observable<any> {
+    getProducts(param?: any): Observable<Product[]> {
         return this.httpService.get("/product/get/products", param);
+    }
+    getProduct(param?: any): Observable<any> {
+        return this.httpService.get("/product/get/product", param);
     }
 }

@@ -9,6 +9,7 @@ import { AuthGuard } from './guards/auth-guard';
 import { AnonGuard } from './guards/anon-guard';
 import { UserRepository } from './Repositories/User-repo';
 import { ApiProductsService } from './services/api-products-service';
+import { ProductsRepository } from './Repositories/Products-repo';
 // import { TokenInterceptorService } from './Token intercepter/token-interceptor.service';
 
 
@@ -27,6 +28,7 @@ import { ApiProductsService } from './services/api-products-service';
     ApiService,
     ApiProductsService,
     UserRepository,
+    ProductsRepository,
     AuthGuard,
     AnonGuard
     // {

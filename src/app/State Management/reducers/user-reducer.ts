@@ -38,5 +38,4 @@ export const getLoaded = (state: UserReducerState) => {
 }
 export const getUser = (state: UserReducerState) => {
     state.user;
-    console.log(state.user)
 }

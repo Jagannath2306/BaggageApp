@@ -1,13 +1,11 @@
 <div class="container-fluid margin-top-md margin-bottom-md">
   <div class="row ">
     <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
-        <ng-template ngFor let-product [ngForOf]="Iproduct" let-i="index">
           <article class="center-align">
-            <img class="zoom-img" [imageZoom]="zoomedImageSrc" [allowZoom]="true" [lensWidth]="730" [lensHeight]="600"
-             [windowPosition]="3" [lensBorder]="1" [src]="product.image" width="auto">
+            <!-- <img class="zoom-img" [imageZoom]="product.itemImage" [allowZoom]="true" [lensWidth]="730" [lensHeight]="600"
+                                                 [windowPosition]="3" [lensBorder]="1" [src]="product.itemImage" width="auto"> -->
 
           </article>
-        </ng-template>
     </div>
 
     <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
@@ -19,7 +17,8 @@
                 bags women shoulder handbags</p> -->
             </div>
             <div class="col-md-8 col-sm-12 col-xs-12 product-item-details">
-              <h3>{{modelTitle}}</h3>
+              <h3>{{product.itemName}}</h3>
+              <h3>{{product.itemTitle}}</h3>
             </div>
             <div class="col-md-8 col-sm-12 col-xs-12">
               <ul class="stars-buy">
@@ -28,12 +27,12 @@
                 <li><a href="#"><span class="fa fa-star-half-o" aria-hidden="true"></span></a></li>
                 <li><a href="#"><span class="fa fa-star-half-o" aria-hidden="true"></span></a></li>
                 <li><a href="#"><span class="fa fa-star-o" aria-hidden="true"></span></a></li>
-                <span>&nbsp;3.5 &nbsp; &nbsp; 23 Reviews &nbsp;&nbsp;19 Orders </span>
+                <span>&nbsp;{{product.itemRatting}} &nbsp; &nbsp; 23 Reviews &nbsp;&nbsp;{{product.itemSold}} Orders </span>
               </ul>
             </div>
             <div class="col-md-8 col-sm-12 col-xs-12 margin-top-xs">
-              <span class="product-price">&#x20B9; {{onOffer}}</span>&nbsp; &nbsp;
-              <span class="product-price-del"><del>&#x20B9; {{price}}</del></span> &nbsp; &nbsp;
+              <span class="product-price">&#x20B9; {{product.itemPrice}}</span>&nbsp; &nbsp;
+              <span class="product-price-del"><del>&#x20B9; {{product.itemPriceOnOffer}}</del></span> &nbsp; &nbsp;
               <span class="product-disc">- 15%</span>
             </div>
             <div class="col-md-8 col-sm-12 col-xs-12 margin-top-xs">
@@ -46,7 +45,7 @@
                 Estimated Delivery: 2 days</span>
             </div>
             <div class="col-md-8 col-sm-12 col-xs-12">
-              <h4 class="color-success">In stock.</h4>
+              <h4 class="color-success">{{product.itemInStock}} In stock.</h4>
               <span class="color-success"><strong>Guaranteed</strong></span> delivery to pincode
               <strong>560004</strong> - Bengaluru by <strong> Sunday, August 18 </strong>with <strong> Two-Day
                 Delivery</strong> — Order

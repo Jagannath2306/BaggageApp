@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiProductsService } from 'src/app/shared/services/api-products-service';
+import { ProductsRepository } from 'src/app/shared/Repositories/Products-repo';
 
 @Component({
   selector: 'app-collection',
@@ -12,14 +12,12 @@ export class CollectionComponent implements OnInit {
   service_products: any;
   constructor(
     private route: Router,
-    private productService: ApiProductsService
+    private productsRepository: ProductsRepository
   ) { }
 
   ngOnInit() {
-    this.productService.getProducts().subscribe((res) => {
-      this.products = res;
-    }, () => {
-
+    this.productsRepository.getProducts().subscribe((getStoreData) => {
+      this.products = getStoreData;
     })
   }
   viewDetail(product) {

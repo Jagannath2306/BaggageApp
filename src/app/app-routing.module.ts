@@ -13,16 +13,16 @@ const routes: Routes = [
     path: "home", component: HomeComponent
   },
   {
-    path: "user", loadChildren : "./User Module/user.module#UserModule"
+    path: "user", loadChildren : () => import('./User Module/user.module').then(m => m.UserModule)
   },
   {
-    path: "products", loadChildren : "./Products Module/products.module#ProductsModule"
+    path: "products", loadChildren : () => import('./Products Module/products.module').then(m => m.ProductsModule)
   },
   {
-    path: "contact", loadChildren : "./Contact Module/contact.module#ContactModule"
+    path: "contact", loadChildren : () => import('./Contact Module/contact.module').then(m => m.ContactModule)
   },
   {
-    path: "cart", loadChildren : "./Cart Module/cart.module#CartModule"
+    path: "cart", loadChildren : () => import('./Cart Module/cart.module').then(m => m.CartModule)
   },
   {
     path:"**",component:PageNotFoundComponent

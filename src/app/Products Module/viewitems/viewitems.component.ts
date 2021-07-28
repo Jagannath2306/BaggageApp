@@ -24,8 +24,7 @@ export class ViewitemsComponent implements OnInit {
   _id: any;
   Iproduct: any;
 
-  myThumbnail = "https://wittlock.github.io/ngx-image-zoom/assets/thumb.jpg";
-  myFullresImage = "https://wittlock.github.io/ngx-image-zoom/assets/fullres.jpg";
+
   constructor(private router: Router,
     private actRouter: ActivatedRoute,
     private apiProductsService: ApiProductsService,

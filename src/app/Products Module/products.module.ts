@@ -9,7 +9,6 @@ import { EasybuyComponent } from './easybuy/easybuy.component';
 import { HmComponent } from './hm/hm.component';
 import { ViewitemsComponent } from './viewitems/viewitems.component';
 import { routing } from './products.routing';
-import { NgxImageZoomModule } from 'ngx-image-zoom';
 
 
 @NgModule({
@@ -24,7 +23,6 @@ import { NgxImageZoomModule } from 'ngx-image-zoom';
     ViewitemsComponent],
   imports: [
     CommonModule,
-    NgxImageZoomModule,
     routing
   ],
   exports:[ViewitemsComponent]

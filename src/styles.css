@@ -663,3 +663,19 @@ a{
 .font-18{
   font-size: 18px;
 }
+.padding-0{
+  padding:0px !important;
+}
+.items {
+  padding: 5px 35px;
+    margin: 17px;
+    text-align: center;
+    width: auto;
+    border: 1px solid #f0dfdf;
+    border-radius: 2%;
+    height: 370px !important;
+}
+.items:hover{
+  -webkit-box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+}

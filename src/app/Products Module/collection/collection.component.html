@@ -1,37 +1,23 @@
 <div class="container">
- 
-  <div [ngSwitch]="status">
-    <div *ngSwitchCase="'loading'">
-      <div id="buffering-img">
-        <img src="./assets/loading.gif" alt="Loading" height="150">
-      </div>
-    </div>
-    <div *ngSwitchCase="'success'">
-      
-        <div class="row margin-all">
-            <div class="col-md-12 col-sm-12 col-xs-12 heading-text">
-              <h2>Choose you Collection</h2>
-            </div>
-          </div>
-
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12 panel-heading-text">
-          <strong>Puma Collections</strong>
-          <button class="btn btn-info pull-right">View All</button>
+  <div class="row">
+    <div class="row margin-all">
+      <div class="col-md-12 col-sm-12 col-xs-12 heading-text">
+        <h2>Make Your Collection's</h2>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12 ngFor let-product [ngForOf]="puma_Products" let-i="index"col-sm-11 col-xs-10 col-sm-offset-1 col-xs-offset-2 flex-box-container">
-          <div class="flex-container">
-            <ng-template>
+        </div>
+  </div>
+  <div class="row">
+          <ng-template ngFor let-product [ngForOf]="products" let-i="index">
+            <div class="col-md-3 col-sm-12 col-xs-12 col-lg-3 padding-0">
               <div class="items" (click)="viewDetail(product)">
-                <img [(src)]="product.image" height="180" alt="" class="center-block">
-                <div class="product-details border-bottom margin-top-sm">
-                  <span>{{product.title}}</span>
+              <img [(src)]="product.itemImage" alt="" class="center-block img-responsive">
+              <div class="product-details border-bottom">
+                <span>{{product.itemTitle | slice:0:15}}</span>
                 </div>
-                <div class="margin-top-sm" align="center">
-                  <span><del>&#x20B9;{{product.price}}</del></span>&nbsp; <span
-                    class="item-price">&#x20B9;{{product.priceOnOffer}}</span> <br>
+                <div class="" align="center">
+                  <span class="item-price">&#x20B9;{{product.itemPriceOnOffer}}</span>&nbsp;
+                    <span><del>&#x20B9;{{product.itemPrice}}</del></span>
+                    <br>
                   <ul class="stars">
                     <li><a href="#"><span class="fa fa-star" aria-hidden="true"></span></a></li>
                     <li><a href="#"><span class="fa fa-star" aria-hidden="true"></span></a></li>
@@ -40,240 +26,9 @@
                     <li><a href="#"><span class="fa fa-star-o" aria-hidden="true"></span></a></li>
                   </ul>
                 </div>
-              </div>
-            </ng-template>
+                </div>
           </div>
-        </div>
-      </div>
-    </div>
-    <div *ngSwitchCase="'error'">
-      <img class="error" src="https://www.indiafilings.com/learn/wp-content/uploads/2018/11/GST-Error-File.jpg" alt=""
-        width="700px">
-    </div>
-  </div>
-
-  <div [ngSwitch]="status">
-    <div *ngSwitchCase="'loading'">
-      <div id="buffering-img">
-        <img src="./assets/loading.gif" alt="Loading" height="150">
-      </div>
-    </div>
-    <div *ngSwitchCase="'success'">
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12 panel-heading-text">
-          <strong>Levi's Collections</strong>
-          <button class="btn btn-info pull-right">View All</button>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12 col-sm-11 col-xs-10 col-sm-offset-1 col-xs-offset-2 flex-box-container">
-          <div class="flex-container">
-            <ng-template ngFor let-product [ngForOf]="levis_Products" let-i="index">
-              <div class="items" (click)="viewDetail(product)">
-                <img [(src)]="product.image" height="180" alt="" class="center-block">
-                <div class="product-details border-bottom margin-top-sm">
-                  <span>{{product.title}}</span>
-                </div>
-                <div class="margin-top-sm" align="center">
-                  <span><del>&#x20B9;{{product.price}}</del></span>&nbsp; <span
-                    class="item-price">&#x20B9;{{product.priceOnOffer}}</span> <br>
-                  <ul class="stars">
-                    <li><a href="#"><span class="fa fa-star" aria-hidden="true"></span></a></li>
-                    <li><a href="#"><span class="fa fa-star" aria-hidden="true"></span></a></li>
-                    <li><a href="#"><span class="fa fa-star-half-o" aria-hidden="true"></span></a></li>
-                    <li><a href="#"><span class="fa fa-star-half-o" aria-hidden="true"></span></a></li>
-                    <li><a href="#"><span class="fa fa-star-o" aria-hidden="true"></span></a></li>
-                  </ul>
-                </div>
-              </div>
             </ng-template>
-          </div>
-        </div>
+    
       </div>
-    </div>
-    <div *ngSwitchCase="'error'">
-      <img class="error" src="https://www.indiafilings.com/learn/wp-content/uploads/2018/11/GST-Error-File.jpg" alt=""
-        width="700px">
-    </div>
-  </div>
-
-  <div [ngSwitch]="status">
-    <div *ngSwitchCase="'loading'">
-      <div id="buffering-img">
-        <img src="./assets/loading.gif" alt="Loading" height="150">
       </div>
-    </div>
-    <div *ngSwitchCase="'success'">
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12 panel-heading-text">
-          <strong>Reliance Trents Collections</strong>
-          <button class="btn btn-info pull-right">View All</button>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12 col-sm-11 col-xs-10 col-sm-offset-1 col-xs-offset-2 flex-box-container">
-          <div class="flex-container">
-            <ng-template ngFor let-product [ngForOf]="trends_Products" let-i="index">
-              <div class="items" (click)="viewDetail(product)">
-                <img [(src)]="product.image" height="180" alt="" class="center-block">
-                <div class="product-details border-bottom margin-top-sm">
-                  <span>{{product.title}}</span>
-                </div>
-                <div class="margin-top-sm" align="center">
-                  <span><del>&#x20B9;{{product.price}}</del></span>&nbsp; <span
-                    class="item-price">&#x20B9;{{product.priceOnOffer}}</span> <br>
-                  <ul class="stars">
-                    <li><a href="#"><span class="fa fa-star" aria-hidden="true"></span></a></li>
-                    <li><a href="#"><span class="fa fa-star" aria-hidden="true"></span></a></li>
-                    <li><a href="#"><span class="fa fa-star-half-o" aria-hidden="true"></span></a></li>
-                    <li><a href="#"><span class="fa fa-star-half-o" aria-hidden="true"></span></a></li>
-                    <li><a href="#"><span class="fa fa-star-o" aria-hidden="true"></span></a></li>
-                  </ul>
-                </div>
-              </div>
-            </ng-template>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div *ngSwitchCase="'error'">
-      <img class="error" src="https://www.indiafilings.com/learn/wp-content/uploads/2018/11/GST-Error-File.jpg" alt=""
-        width="700px">
-    </div>
-  </div>
-
-  <div [ngSwitch]="status">
-    <div *ngSwitchCase="'loading'">
-      <div id="buffering-img">
-        <img src="./assets/loading.gif" alt="Loading" height="150">
-      </div>
-    </div>
-    <div *ngSwitchCase="'success'">
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12 panel-heading-text">
-          <strong>Unlimited Collections</strong>
-          <button class="btn btn-info pull-right">View All</button>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12 col-sm-11 col-xs-10 col-sm-offset-1 col-xs-offset-2 flex-box-container">
-          <div class="flex-container">
-            <ng-template ngFor let-product [ngForOf]="unlimited_Products" let-i="index">
-              <div class="items" (click)="viewDetail(product)">
-                <img [(src)]="product.image" height="180" alt="" class="center-block">
-                <div class="product-details border-bottom margin-top-sm">
-                  <span>{{product.title}}</span>
-                </div>
-                <div class="margin-top-sm" align="center">
-                  <span><del>&#x20B9;{{product.price}}</del></span>&nbsp; <span
-                    class="item-price">&#x20B9;{{product.priceOnOffer}}</span> <br>
-                  <ul class="stars">
-                    <li><a href="#"><span class="fa fa-star" aria-hidden="true"></span></a></li>
-                    <li><a href="#"><span class="fa fa-star" aria-hidden="true"></span></a></li>
-                    <li><a href="#"><span class="fa fa-star-half-o" aria-hidden="true"></span></a></li>
-                    <li><a href="#"><span class="fa fa-star-half-o" aria-hidden="true"></span></a></li>
-                    <li><a href="#"><span class="fa fa-star-o" aria-hidden="true"></span></a></li>
-                  </ul>
-                </div>
-              </div>
-            </ng-template>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div *ngSwitchCase="'error'">
-      <img class="error" src="https://www.indiafilings.com/learn/wp-content/uploads/2018/11/GST-Error-File.jpg" alt=""
-        width="700px">
-    </div>
-  </div>
-
-  <div [ngSwitch]="status">
-    <div *ngSwitchCase="'loading'">
-      <div id="buffering-img">
-        <img src="./assets/loading.gif" alt="Loading" height="150">
-      </div>
-    </div>
-    <div *ngSwitchCase="'success'">
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12 panel-heading-text">
-          <strong>Easy Buy Collections</strong>
-          <button class="btn btn-info pull-right">View All</button>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12 col-sm-11 col-xs-10 col-sm-offset-1 col-xs-offset-2 flex-box-container">
-          <div class="flex-container">
-            <ng-template ngFor let-product [ngForOf]="easybuy_Products" let-i="index">
-              <div class="items" (click)="viewDetail(product)">
-                <img [(src)]="product.image" height="180" alt="" class="center-block">
-                <div class="product-details border-bottom margin-top-sm">
-                  <span>{{product.title}}</span>
-                </div>
-                <div class="margin-top-sm" align="center">
-                  <span><del>&#x20B9;{{product.price}}</del></span>&nbsp; <span
-                    class="item-price">&#x20B9;{{product.priceOnOffer}}</span> <br>
-                  <ul class="stars">
-                    <li><a href="#"><span class="fa fa-star" aria-hidden="true"></span></a></li>
-                    <li><a href="#"><span class="fa fa-star" aria-hidden="true"></span></a></li>
-                    <li><a href="#"><span class="fa fa-star-half-o" aria-hidden="true"></span></a></li>
-                    <li><a href="#"><span class="fa fa-star-half-o" aria-hidden="true"></span></a></li>
-                    <li><a href="#"><span class="fa fa-star-o" aria-hidden="true"></span></a></li>
-                  </ul>
-                </div>
-              </div>
-            </ng-template>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div *ngSwitchCase="'error'">
-      <img class="error" src="https://www.indiafilings.com/learn/wp-content/uploads/2018/11/GST-Error-File.jpg" alt=""
-        width="700px">
-    </div>
-  </div>
-
-  <div [ngSwitch]="status">
-    <div *ngSwitchCase="'loading'">
-      <div id="buffering-img">
-        <img src="./assets/loading.gif" alt="Loading" height="150">
-      </div>
-    </div>
-    <div *ngSwitchCase="'success'">
-      <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12 panel-heading-text">
-          <strong>H & M Collections</strong>
-          <button class="btn btn-info pull-right">View All</button>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12 col-sm-11 col-xs-10 col-sm-offset-1 col-xs-offset-2 flex-box-container">
-          <div class="flex-container">
-            <ng-template ngFor let-product [ngForOf]="hm_Products" let-i="index">
-              <div class="items" (click)="viewDetail(product)">
-                <img [(src)]="product.image" height="180" alt="" class="center-block">
-                <div class="product-details border-bottom margin-top-sm">
-                  <span>{{product.title}}</span>
-                </div>
-                <div class="margin-top-sm" align="center">
-                  <span><del>&#x20B9;{{product.price}}</del></span>&nbsp; <span
-                    class="item-price">&#x20B9;{{product.priceOnOffer}}</span> <br>
-                  <ul class="stars">
-                    <li><a href="#"><span class="fa fa-star" aria-hidden="true"></span></a></li>
-                    <li><a href="#"><span class="fa fa-star" aria-hidden="true"></span></a></li>
-                    <li><a href="#"><span class="fa fa-star-half-o" aria-hidden="true"></span></a></li>
-                    <li><a href="#"><span class="fa fa-star-half-o" aria-hidden="true"></span></a></li>
-                    <li><a href="#"><span class="fa fa-star-o" aria-hidden="true"></span></a></li>
-                  </ul>
-                </div>
-              </div>
-            </ng-template>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div *ngSwitchCase="'error'">
-      <img class="error" src="https://www.indiafilings.com/learn/wp-content/uploads/2018/11/GST-Error-File.jpg" alt=""
-        width="700px">
-    </div>
-  </div>
-</div>

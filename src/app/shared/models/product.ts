@@ -1,0 +1,21 @@
+export interface Product {
+    ItemModelNumber: String,
+    itemName: String,
+    itemTitle: String,
+    itemBrand: String,
+    itemColor: String,
+    itemPrice: Number,
+    itemPriceOnOffer: Number,
+    itemDescription: String,
+    itemSpecifications: String,
+    itemRatting: Number,
+    itemLike: Number,
+    itemUnLike: Number,
+    itemSold: Number,
+    itemInStock: Number,
+    itemImage: String,
+    itemOccasion: String,
+    itemQuality: Number,
+    itemType: String,
+    itemPattern: String
+}

@@ -54,54 +54,6 @@ border:0px;
     border-radius: 0px;
     border:none;
 }
-.flex-container {
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
-    margin:0px auto;
-   
-  }
-  .flex-container > .items {
-    background-color: #f7f7f7;
-    padding:35px;
-    margin: 17px;
-    text-align: center;
-    width:auto;
-  }
-  .flex-box-container{
-      margin-left:0px !important;
-  }
 
   
-@media screen and (max-width: 1024px){
-    .flex-box-container{
-        margin-left:85px !important;
-    }
-}
-
-
-@media screen and (min-width: 840px){
-    .flex-box-container{
-        margin-left:0px !important;
-    }
-}
-@media screen and (max-width: 700px){
-    .flex-box-container{
-        margin-left:163px !important;
-    }
-}
-@media screen and (max-width: 600px){
-    .flex-box-container{
-        margin-left:122px !important;
-    }
-}
-@media screen and (max-width: 450px){
-    .flex-box-container{
-        margin-left:33px !important;
-    }
-}
-@media screen and (max-width: 320px){
-    .flex-box-container{
-        margin-left:5px !important;
-    }
-}
+ 

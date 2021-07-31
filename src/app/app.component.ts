@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { LoaderService } from './shared/Token intercepter/loader.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,7 +8,8 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class AppComponent {
   constructor(
-    private router: Router
+    private router: Router,
+    public loaderService: LoaderService
   ) { }
   ngOnInit() {
     this.router.events.subscribe((evt) => {

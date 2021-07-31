@@ -18,8 +18,8 @@
                 bags women shoulder handbags</p> -->
             </div>
             <div class="col-md-8 col-sm-12 col-xs-12 product-item-details">
-              <h3>{{productName}}</h3>
-              <h3>{{productTitle}}</h3>
+              <h2>{{productName | titlecase }}</h2>
+                <h4 class="margin-top-md text-primary">{{productTitle}}</h4>
             </div>
             <div class="col-md-8 col-sm-12 col-xs-12">
               <ul class="stars-buy">
@@ -54,14 +54,14 @@
             </div>
           </div>
 
-          <div class="row">
+          <div class="row margin-top-xs">
             <div class="col-md-6 col-sm-12 col-xs-12 margin-top-xs form-group">
               <button class="btn btn-buy form-control">BUY NOW</button>
             </div>
             
             <div class="col-md-6 col-sm-12 col-xs-12 margin-top-xs form-group">
-              <button class="btn btn-cart form-control" (click)="addToCart()"> ADD TO cart</button>
-              <!-- <button (click)="showCart()" *ngIf="model_box" class="btn btn-cart form-control"> SHOW CART</button>             -->
+              <button *ngIf="isAddedToCart" class="btn btn-cart form-control" (click)="addToCart()"> ADD TO cart</button>
+              <button (click)="showCart()" *ngIf="!isAddedToCart" class="btn btn-cart form-control"> SHOW CART</button>
             </div>
           </div>
 

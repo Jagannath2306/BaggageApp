@@ -7,6 +7,7 @@ import { UserRepository } from 'src/app/shared/Repositories/User-repo';
 import { RootReducerState } from 'src/app/State Management/reducers';
 import { UserSuccessAction } from 'src/app/State Management/actions/user-action';
 import { Store } from '@ngrx/store';
+import { NotificationService } from 'src/app/Notification/notification-service';
 @Component({
   selector: 'app-viewitems',
   templateUrl: './viewitems.component.html',
@@ -26,6 +27,8 @@ export class ViewitemsComponent implements OnInit {
   productPriceOnOffer: any;
   productQty: any;
   productInStock: any;
+  isAddedToCart = true;
+  cartItems: any;
 
 
   constructor(private router: Router,
@@ -33,7 +36,9 @@ export class ViewitemsComponent implements OnInit {
     private apiProductsService: ApiProductsService,
     private ngxImgZoomService: NgxImgZoomService,
     private apiService: ApiService,
-    private store: Store<RootReducerState>
+    private store: Store<RootReducerState>,
+    private userRepo: UserRepository,
+    private notificationService: NotificationService,
   ) {
     this.ngxImgZoomService.setZoomBreakPoints([
       { w: 100, h: 100 },
@@ -48,7 +53,6 @@ export class ViewitemsComponent implements OnInit {
     this.actRouter.paramMap.subscribe((param) => {
       this.apiProductsService.getProduct({ _id: param.get("id") }).subscribe((res) => {
         this.product = res;
-        console.log(this.product)
         this.productName = this.product.itemName || "";
         this.productTitle = this.product.itemTitle || "";
         this.productRating = this.product.itemRatting || "";
@@ -59,6 +63,16 @@ export class ViewitemsComponent implements OnInit {
         this.productInStock = this.product.itemInStock || "";
         this.previewImageSrc = this.product.itemImage;
         this.zoomImageSrc = this.product.itemImage;
+
+        this.userRepo.getLogedUser().subscribe((getStoreData) => {
+          this.cartItems = getStoreData.cart;
+          this.cartItems.forEach(element => {
+            if (element._id == param.get("id")) {
+              console.log(element._id)
+              this.isAddedToCart = false;
+            }
+          });
+        })
       }, (e) => { })
     });
 
@@ -67,14 +81,14 @@ export class ViewitemsComponent implements OnInit {
   addToCart() {
     this.apiService.addToCart(this.product).subscribe((res) => {
       this.store.dispatch(new UserSuccessAction(res));
-    }, () => { })
+      this.notificationService.showNotification("success", `Item added to Cart`)
+      this.isAddedToCart = false;
+    }, () => {
+      this.isAddedToCart = true;
+      this.notificationService.showNotification("error", 'Something went wrong, Please try again..');
+    })
   }
-
-  // showCart() {
-  //   this.router.navigate(["cart"]);
-  //   // Bootstrap model
-  //   $("#modelErr").modal('hide');
-  //   $("#modelSucc").modal('hide');
-
-  // }
+  showCart(){
+    this.router.navigate(['cart']);
+  }
 }

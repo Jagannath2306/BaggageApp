@@ -21,5 +21,8 @@
        </div> -->
   </router-outlet>
 <app-footer></app-footer>
-<app-spinner></app-spinner>
+<!-- <app-spinner></app-spinner> -->
+<div id="buffering-img" *ngIf="loaderService.isLoading | async">
+  <img src="./assets/loading.gif" alt="Loading" height="150">
+</div>
 <notifier-container></notifier-container>

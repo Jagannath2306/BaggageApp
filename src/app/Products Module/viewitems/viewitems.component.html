@@ -1,10 +1,11 @@
 <div class="container-fluid margin-top-md margin-bottom-md">
   <div class="row ">
-    <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+    <div class="col-md-6 col-lg-5 col-sm-12 col-xs-12">
           <article class="center-align">
-            <!-- <img class="zoom-img" [imageZoom]="product.itemImage" [allowZoom]="true" [lensWidth]="730" [lensHeight]="600"
-                                                 [windowPosition]="3" [lensBorder]="1" [src]="product.itemImage" width="auto"> -->
-                                                
+            <ngx-img-zoom [zoomImageSrc]="zoomImageSrc" [previewImageSrc]="previewImageSrc"
+              [imgStyle]="'width:500px; height:480px; bottom:0;  left:100;  right:0;  top:0;  margin:0 auto; border:1px solid #red;'"
+              [resultStyle]="'width:750px; height:480px; background-repeat: no-repeat; z-index: 2; position:absolute;-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); top: 0;left: 100%;'"
+              [lensStyle]="'width:55px; height:55px'" [enableZoom]="enableZoom" [containerStyle]=""></ngx-img-zoom>
           </article>
     </div>
 
@@ -17,8 +18,8 @@
                 bags women shoulder handbags</p> -->
             </div>
             <div class="col-md-8 col-sm-12 col-xs-12 product-item-details">
-              <h3>{{product.itemName}}</h3>
-              <h3>{{product.itemTitle}}</h3>
+              <h3>{{productName}}</h3>
+              <h3>{{productTitle}}</h3>
             </div>
             <div class="col-md-8 col-sm-12 col-xs-12">
               <ul class="stars-buy">
@@ -27,16 +28,16 @@
                 <li><a href="#"><span class="fa fa-star-half-o" aria-hidden="true"></span></a></li>
                 <li><a href="#"><span class="fa fa-star-half-o" aria-hidden="true"></span></a></li>
                 <li><a href="#"><span class="fa fa-star-o" aria-hidden="true"></span></a></li>
-                <span>&nbsp;{{product.itemRatting}} &nbsp; &nbsp; 23 Reviews &nbsp;&nbsp;{{product.itemSold}} Orders </span>
+                <span>&nbsp;{{productRating}} &nbsp; &nbsp; 23 Reviews &nbsp;&nbsp;{{productSold}} Orders </span>
               </ul>
             </div>
             <div class="col-md-8 col-sm-12 col-xs-12 margin-top-xs">
-              <span class="product-price">&#x20B9; {{product.itemPrice}}</span>&nbsp; &nbsp;
-              <span class="product-price-del"><del>&#x20B9; {{product.itemPriceOnOffer}}</del></span> &nbsp; &nbsp;
+              <span class="product-price">&#x20B9; {{productPrice}}</span>&nbsp; &nbsp;
+              <span class="product-price-del"><del>&#x20B9; {{productPriceOnOffer}}</del></span> &nbsp; &nbsp;
               <span class="product-disc">- 15%</span>
             </div>
             <div class="col-md-8 col-sm-12 col-xs-12 margin-top-xs">
-              <p>Quality: {{qty}}</p>
+              <p>Quality: {{productQty}}</p>
               <!-- <span class="badge badge-plus">+</span> &nbsp; 5 &nbsp; <span class="badge badge-min">&#8722;</span> -->
               <span class="product-price-del">123 pieces available</span>
             </div>
@@ -45,7 +46,7 @@
                 Estimated Delivery: 2 days</span>
             </div>
             <div class="col-md-8 col-sm-12 col-xs-12">
-              <h4 class="color-success">{{product.itemInStock}} In stock.</h4>
+              <h4 class="color-success">{{productInStock}} In stock.</h4>
               <span class="color-success"><strong>Guaranteed</strong></span> delivery to pincode
               <strong>560004</strong> - Bengaluru by <strong> Sunday, August 18 </strong>with <strong> Two-Day
                 Delivery</strong> — Order
@@ -59,8 +60,9 @@
             </div>
             
             <div class="col-md-6 col-sm-12 col-xs-12 margin-top-xs form-group">
-              <button *ngIf="!model_box" class="btn btn-cart form-control" (click)="addToCart()"> ADD TO cart</button>
-              <button (click)="showCart()" *ngIf="model_box" class="btn btn-cart form-control"> SHOW CART</button>            </div>
+              <button class="btn btn-cart form-control" (click)="addToCart()"> ADD TO cart</button>
+              <!-- <button (click)="showCart()" *ngIf="model_box" class="btn btn-cart form-control"> SHOW CART</button>             -->
+            </div>
           </div>
 
 

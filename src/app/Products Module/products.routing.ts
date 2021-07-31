@@ -15,42 +15,34 @@ import { ViewitemsComponent } from './viewitems/viewitems.component';
 
 const routes: Routes = [
     {
-        path: '', component: CollectionComponent,
-        canActivate: [AnonGuard]
+        path: '', component: CollectionComponent
     },
     {
         path: "collection", component: CollectionComponent,
 
     },
     {
-        path: "easy-buy", component: EasybuyComponent,
-        canActivate: [AnonGuard]
+        path: "easy-buy", component: EasybuyComponent
     },
     {
         path: "trends", component: TrendsComponent,
         canActivate: [AnonGuard]
     },
     {
-        path: "hm", component: HmComponent,
-        canActivate: [AnonGuard]
+        path: "hm", component: HmComponent
     },
     {
-        path: "unlimited", component: UnlimitedComponent,
-        canActivate: [AnonGuard]
+        path: "unlimited", component: UnlimitedComponent
     },
     {
-        path: "levis", component: LevisComponent,
-        canActivate: [AnonGuard]
+        path: "levis", component: LevisComponent
     },
     {
-        path: "puma", component: PumaComponent,
-        canActivate: [AnonGuard]
+        path: "puma", component: PumaComponent
     },
     {
-        path: "viewitems/:id", component: ViewitemsComponent,
-        canActivate: [AnonGuard]
+        path: "viewitems/:id", component: ViewitemsComponent
     }
-
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forChild(routes);

@@ -44,7 +44,12 @@ export class ApiService {
         formData.append('profilePhoto', body);
         return this.httpService.patch("/user/update/profilePic", formData);
     }
-
+    addToCart(body: any): Observable<any> {
+        return this.httpService.patch("/user/update/cart", body);
+    }
+    deleteCart(param?: any): Observable<any> {
+        return this.httpService.delete("/user/update/cart/delete", param);
+    }
     fatchUser(param?: any): Observable<User> {
         return this.httpService.get("/user/fatch");
     }

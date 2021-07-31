@@ -36,9 +36,9 @@ export class SignUpComponent implements OnInit {
       phone: ['',],
       dateOfBirth: [null,],
       address:["",],
-      cart:["",],
-      history:["",],
-      cards:["",],
+      cart: [[]],
+      history: [[]],
+      cards: [[]],
       profilePhoto: ["",]
     });
   }
@@ -49,7 +49,7 @@ export class SignUpComponent implements OnInit {
       this.apiService.signup(this.userRegistrationForm.value).subscribe((res) => {
         this.notificationService.showNotification("success", "You have successfully signed up");
         console.log(res);
-        this.router.navigate(['user']);
+        this.router.navigate(['home']);
         }, (error) => {
         this.isSubmitted = !this.isSubmitted;
         });

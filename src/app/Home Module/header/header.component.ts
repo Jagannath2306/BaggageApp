@@ -19,15 +19,14 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.userRepo.getLogedUser().subscribe((getStoreData) => {
-      if (Object.keys(getStoreData).length == 0 && getStoreData.constructor === Object) {
+      if (Object.keys(getStoreData).length === 0 && getStoreData.constructor === Object) {
         this.isUserlogged = false;
         this.cartItems = 0;
       }
       else {
         this.isUserlogged = true;
         this.loggedUser = getStoreData;
-        // this.cartItems = this.loggedUser.cart.lenght;
-        this.cartItems = 0;
+        this.cartItems = this.loggedUser.cart.length;
       }
     });
   }

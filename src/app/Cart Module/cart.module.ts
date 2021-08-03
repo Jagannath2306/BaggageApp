@@ -6,13 +6,14 @@ import { routing } from './Cart.routing';
 import { BillingAddressComponent } from './billing-address/billing-address.component';
 import { PaymentPortalComponent } from './payment-portal/payment-portal.component';
 import { ReviewComponent } from './review/review.component';
-
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [MyCartComponent, BillingAddressComponent, PaymentPortalComponent, ReviewComponent],
   imports: [
     CommonModule,
     SharedModule,
+    FormsModule,
     routing
   ],
   exports:[MyCartComponent]

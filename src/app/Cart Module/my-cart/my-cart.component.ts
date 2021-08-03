@@ -1,106 +1,114 @@
 import { Component, OnInit } from '@angular/core';
-// import { GetAllProductsService } from 'src/app/shared/Services/Products/Get All Products/get-all-products.service';
-// import { DeleteService } from 'src/app/shared/Services/Deletes/delete.service';
-// import { SubjectDataService } from 'src/app/shared/Services/subject-data.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-// import { AddtoCartService } from 'src/app/shared/Services/addto-cart.service';
+import { UserRepository } from 'src/app/shared/Repositories/User-repo';
+import { NotificationService } from 'src/app/Notification/notification-service';
+import { ApiService } from 'src/app/shared/services/api-service';
+import { Store } from '@ngrx/store';
+import { RootReducerState } from 'src/app/State Management/reducers';
+import { UserSuccessAction } from 'src/app/State Management/actions/user-action';
 @Component({
   selector: 'app-my-cart',
   templateUrl: './my-cart.component.html',
   styleUrls: ['./my-cart.component.css']
 })
 export class MyCartComponent implements OnInit {
-  CartProducts: any;
+  public CartProducts: any;
   status: any;
   lenthData: number;
   totalAmount = 0;
   disAmount = 0;
   count_data: any;
-  recivedData: any;
+  userData: any;
   update_data = [];
   constructor(
-    // private service_products: GetAllProductsService,
-    // private delete_item: DeleteService,
-    // private subService: SubjectDataService,
     private router: Router,
-    private actRouter: ActivatedRoute
-    // private addServices: AddtoCartService
+    private actRouter: ActivatedRoute,
+    private userRepo: UserRepository,
+    private notificationService: NotificationService,
+    private apiService: ApiService,
+    private store: Store<RootReducerState>
   ) { }
 
   ngOnInit() {
-    // let data = JSON.parse(localStorage.getItem("user"));
-    // this.addServices.AddCart(data).subscribe((res) => {
-    //   this.recivedData = res;
-    //   console.log(this.recivedData[0].cart)
-    //   this.CartProducts = this.recivedData[0].cart;
-    //   this.count_data = this.recivedData[0].cart.length;
 
-    //   // service call for updated value of count_data.
-    //   this.subService.cartCount(this.count_data);
-
-    //   //for total amout
-    //   this.totalAmount =0;
-    //   this.CartProducts.forEach((element) => {
-    //     this.totalAmount += parseInt(element.price)
-    //   });
-    //   this.disAmount = this.totalAmount * 15 /100;
-
-    // })
+    this.userRepo.getLogedUser().subscribe((getStoreData) => {
+      this.userData = getStoreData;
+      this.CartProducts = this.userData.cart;
+      this.totalAmount = 0;
+      this.disAmount = 0;
+      this.CartProducts.map((element) => {
+        const totalPrice = element.itemPrice;
+        const itemDescPrice = element.itemPrice * 15 / 100
+        const totalDiscPrice = totalPrice - element.itemPrice * 15 / 100;
+        const totalQwty = element.itemQuality;
+        const discPrice = 0;
+        this.setTotalAmountPlus(totalDiscPrice, totalQwty, totalPrice, discPrice);
+        this.setTotaldisAmountPlus(totalPrice);
+      });
+    })
   }
 
+  incQty(item) {
+    this.CartProducts = this.CartProducts.map((element, index) => {
+      if (element._id == item._id) {
+        if (element.itemQuality < 3) {
+          element.itemQuality = element.itemQuality + 1;
+          const totalPrice = element.itemPrice;
+          const discPrice = totalPrice - element.itemPrice * 15 / 100;
+          const totalQwty = element.itemQuality;
+          const totalDiscPrice = discPrice * totalQwty
+          this.setTotalAmountPlus(totalDiscPrice, totalQwty, totalPrice, discPrice);
+          this.setTotaldisAmountPlus(totalPrice)
+        } else {
+          this.notificationService.showNotification("error","Item can't more then 3 !!!");
+        }
+      }
+      return element;
+    });
+  }
+  desQty(item) {
+    this.CartProducts = this.CartProducts.map(element => {
+      if (element._id == item._id) {
+        if (element.itemQuality > 1) {
+          element.itemQuality = element.itemQuality - 1;
+          const totalPrice = element.itemPrice;
+          const discPrice = totalPrice - element.itemPrice * 15 / 100;
+          const totalQwty = element.itemQuality;
+          const totalDiscPrice = discPrice * totalQwty;
+          this.setTotalAmountMinus(totalDiscPrice, totalQwty, totalPrice, discPrice);
+          this.setTotaldisAmountMinus(totalPrice);
+        } else {
+        this.notificationService.showNotification("error","Item can't less then 0 !!!");
+        }
+      }
+      return element;
+    });
+  }
+  setTotalAmountPlus(totalDiscPrice, totalQwty, totalPrice, discPrice) {
+    const rest = discPrice * (totalQwty - 1);
+    this.totalAmount += totalDiscPrice - rest;
+  }
+  setTotalAmountMinus(totalDiscPrice, totalQwty, totalPrice, discPrice) {
+    this.totalAmount -= discPrice;
+  }
+  setTotaldisAmountPlus(totalPrice) {
+    if (totalPrice > 1) {
+      this.disAmount += totalPrice * 15 / 100;
+    }
+  }
+  setTotaldisAmountMinus(totalPrice) {
+    this.disAmount -= totalPrice * 15 / 100;
+  }
 
-  // removeItem(product: any) {
-    // alert(product.name)
-    // this.delete_item.deleteIproduct(product.id).subscribe(() => {
+  removeItem(product: any) {
+    this.apiService.deleteCart(product).subscribe((res) => {
+      this.store.dispatch(new UserSuccessAction(res));
+    }, (err) => { })
+  }
 
-    // Success section
-    //   let url = "http://localhost:3000/myCart";
-    //   this.service_products.getAllProducts(url).subscribe((response) => {
-    //     this.CartProducts = response;
-    //   });
-    //   this.count_data = this.CartProducts.length;
-    //   this.subService.cartCount(this.count_data - 1);
-    // })
-    // Bootstrap model closing
-    // $("#modelErr").modal('hide');
-
-    // service call for updated value of count_data.
-    //   this.subService.subject.subscribe((resp) => this.count_data = resp);
-    //console.log("in my cart"+ product)
-    // let user = JSON.parse(localStorage.getItem("user"));
-    // let sendData = [product, user];
-
-    // console.log("remove function "+this.update_data)
-    // let url = 'http://localhost:4000/api/deleteUserCart';
-    // this.delete_item.deleteIproduct(url, sendData).subscribe((res) => {
-
-      ///////////Updating Items after delete ////////////////
-
-  //     let data = JSON.parse(localStorage.getItem("user"));
-  //     this.addServices.AddCart(data).subscribe((res) => {
-  //       this.recivedData = res;
-  //       this.CartProducts = this.recivedData[0].cart;
-  //       this.count_data = this.recivedData[0].cart.length;
-
-
-  //       this.totalAmount =0;
-  //       this.CartProducts.forEach((element) => {
-  //         this.totalAmount += parseInt(element.price)
-  //       });
-  //       this.disAmount = this.totalAmount * 15 /100;
-  //       // service call for updated value of count_data.
-
-  //       this.subService.cartCount(this.count_data);
-  //     });
-
-     
-
-  //   });
-  // }
-
-  // placeOrder() {
-  //   this.router.navigate(["cart/billingAddress"]);
-  // }
+  placeOrder() {
+    this.router.navigate(["cart/billingAddress"]);
+  }
 
 }

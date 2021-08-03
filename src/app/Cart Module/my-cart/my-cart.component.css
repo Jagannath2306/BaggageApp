@@ -199,3 +199,14 @@
 .success-text {
   font-size: 20px;
 }
+.Qty-input{
+  width: 40px;
+  display: inline-block;
+  margin: 2%;
+  height: 30px;
+  text-align: center;
+}
+.plus-mins:hover{
+  background-color:#74d2e7;
+  color:#ffffff;
+}

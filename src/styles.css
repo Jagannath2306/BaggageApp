@@ -679,3 +679,32 @@ a{
   -webkit-box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
   box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
 }
+.product-price {
+  font-size: 18px;
+  color: rgb(226, 30, 30);
+  font-weight: bold;
+}
+.product-price-del {
+  font-size: 13px;
+  color: rgb(136, 124, 124);
+  font-weight: 300;
+}
+.product-disc{
+  font-size: 13px;
+  color: rgb(18, 177, 12);
+  font-weight: 300;
+}
+.carousel-control.right, .carousel-control.left{
+  background-image : none !important;
+}
+.carousel-control .glyphicon-chevron-right, .carousel-control .icon-next , .carousel-control .glyphicon-chevron-left, .carousel-control .icon-prev {
+  font-size: 20px;
+  color:#74d2e7;
+}
+.carousel-inner .item{
+  padding :5% 10%;
+}
+.carousel-caption {
+  position: absolute;
+  bottom: 90px;
+}

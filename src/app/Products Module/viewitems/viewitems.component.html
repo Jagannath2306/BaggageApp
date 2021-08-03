@@ -32,8 +32,8 @@
               </ul>
             </div>
             <div class="col-md-8 col-sm-12 col-xs-12 margin-top-xs">
-              <span class="product-price">&#x20B9; {{productPrice}}</span>&nbsp; &nbsp;
-              <span class="product-price-del"><del>&#x20B9; {{productPriceOnOffer}}</del></span> &nbsp; &nbsp;
+              <span class="product-price">&#x20B9; {{productPriceOnOffer | number: '1.0-0'}}</span>&nbsp; &nbsp;
+              <span class="product-price-del"><del>&#x20B9; {{productPrice}}</del></span> &nbsp; &nbsp;
               <span class="product-disc">- 15%</span>
             </div>
             <div class="col-md-8 col-sm-12 col-xs-12 margin-top-xs">
@@ -56,7 +56,7 @@
 
           <div class="row margin-top-xs">
             <div class="col-md-6 col-sm-12 col-xs-12 margin-top-xs form-group">
-              <button class="btn btn-buy form-control">BUY NOW</button>
+              <button class="btn btn-buy form-control" (click)="buyNow()">BUY NOW</button>
             </div>
             
             <div class="col-md-6 col-sm-12 col-xs-12 margin-top-xs form-group">

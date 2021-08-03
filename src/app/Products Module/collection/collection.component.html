@@ -15,8 +15,8 @@
                 <span>{{product.itemTitle | slice:0:15}}</span>
                 </div>
                 <div class="" align="center">
-                  <span class="item-price">&#x20B9;{{product.itemPriceOnOffer}}</span>&nbsp;
-                    <span><del>&#x20B9;{{product.itemPrice}}</del></span>
+                  <span class="item-price">&#x20B9;{{product.itemPrice - product.itemPrice * 15 / 100 | number: '1.0-0'}}</span>&nbsp;
+                    <span class="product-price-del"><del>&#x20B9;{{product.itemPrice}}</del></span> <span class="product-disc">- 15%</span>
                     <br>
                   <ul class="stars">
                     <li><a href="#"><span class="fa fa-star" aria-hidden="true"></span></a></li>

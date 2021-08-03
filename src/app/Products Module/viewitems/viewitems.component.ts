@@ -58,7 +58,7 @@ export class ViewitemsComponent implements OnInit {
         this.productRating = this.product.itemRatting || "";
         this.productSold = this.product.itemSold || "";
         this.productPrice = this.product.itemPrice || "";
-        this.productPriceOnOffer = this.product.itemPriceOnOffer || "";
+        this.productPriceOnOffer = this.product.itemPrice - this.product.itemPrice  * 15 / 100  || "";
         this.productQty = this.product.itemQuality || "";
         this.productInStock = this.product.itemInStock || "";
         this.previewImageSrc = this.product.itemImage;
@@ -68,7 +68,6 @@ export class ViewitemsComponent implements OnInit {
           this.cartItems = getStoreData.cart;
           this.cartItems.forEach(element => {
             if (element._id == param.get("id")) {
-              console.log(element._id)
               this.isAddedToCart = false;
             }
           });
@@ -90,5 +89,13 @@ export class ViewitemsComponent implements OnInit {
   }
   showCart(){
     this.router.navigate(['cart']);
+  }
+  buyNow(){
+    this.apiService.addToCart(this.product).subscribe((res) => {
+      this.store.dispatch(new UserSuccessAction(res));
+      this.router.navigate(['cart']);
+    }, () => {
+      this.notificationService.showNotification("error", 'Something went wrong, Please try again..');
+    })
   }
 }

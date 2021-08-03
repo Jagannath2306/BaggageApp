@@ -79,7 +79,16 @@ const customNotifierOptions: NotifierOptions = {
     routing,
     SharedModule,
     NotifierModule.withConfig(customNotifierOptions),
-    StoreModule.forRoot(rootReducer)
+    StoreModule.forRoot(rootReducer,{
+      runtimeChecks: {
+        strictStateImmutability: false,
+        strictActionImmutability: false,
+        strictStateSerializability: true,
+        strictActionSerializability: true,
+        strictActionWithinNgZone: true,
+        strictActionTypeUniqueness: true,
+      }
+    })
   ],
   providers: [NotificationService],
   bootstrap: [AppComponent]

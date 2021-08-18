@@ -7,7 +7,7 @@
   <div class="row">
     <div class="col-md-3 col-sm-3 col-xs-12">
       <img src="{{loggedUser?.profilePhoto ? loggedUser.profilePhoto : './../../../assets/default-user.png' }}"
-        height="120" class="rounded-circle center-block profile-picture cur-p" (click)="fileupload.click()">
+        height="120" class="rounded-circle center-block profile-picture cur-p" (click)="fileupload.click()" title="Click here to Upload Profile Photo">
       <form role=" form" [formGroup]="profileForm" (ngSubmit)="profileSubmit()" action="/uploadphoto" method="POST"
         enctype="multipart/form-data">
         <input #fileupload (change)="onFileSelected($event)" type="file" hidden name="profileImg"
@@ -59,7 +59,7 @@
                   side.</span>
                 <hr class="">
                 <div class="row">
-                  <div class="col-sm-12 col-md-12 col-lg-10">
+                  <div class="col-sm-12 col-md-12 col-lg-11">
                     <table class="table">
                       <thead class="font-20">
                         <tr>
@@ -90,7 +90,8 @@
                         <ng-template ngFor let-address [ngForOf]="loggedUser.address" let-i="index">
                           <tr>
                             <td>Address {{i + 1}}</td>
-                            <td>: &nbsp; {{address.address}}</td>
+                            <td>: &nbsp; {{address.street}}, {{address.landMark}}, {{address.city}}, {{address.state}}, {{address.dist}},
+                              {{address.zip}}</td>
                           </tr>
                         </ng-template>
                       </tbody>
@@ -166,19 +167,87 @@
     </div>
 
     <div class="row">
-      <div class="col-sm-12">
         <div formArrayName="address">
           <div *ngFor="let address of address.controls; let i=index">
-            <div class="form-group" [formGroupName]="i">
-              <label for="address">Delivery Address</label>
-              <input appInputButtomBordered type="text" formControlName="address"
+            <div class="col-sm-12">
+              <label for="usr" class="text-primary"> Delivery Address {{i + 1}}</label>
+              <button type="button" class="btn btn-danger
+                                                          pull-right" (click)="removeAddress(address.value,i)"><i
+                  class="glyphicon glyphicon-trash"></i></button>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group" [formGroupName]="i">
+                <input appInputButtomBordered type="text" formControlName="firstName"
+                  class="form-control form-input                                                                                  login-input"
+                  id="name" placeholder="First Name">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group" [formGroupName]="i">
+                <input appInputButtomBordered type="text" formControlName="lastName"
+                  class="form-control form-input                                                                                  login-input"
+                  id="name" placeholder="Last Name">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group" [formGroupName]="i">
+                <input appInputButtomBordered type="text" formControlName="phone"
+                  class="form-control form-input                                                                                  login-input"
+                  id="name" placeholder="Phone No">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group" [formGroupName]="i">
+                <input appInputButtomBordered type="text" formControlName="email"
+                  class="form-control form-input                                                                                  login-input"
+                  id="name" placeholder="Email">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="form-group" [formGroupName]="i">
+                <input appInputButtomBordered type="text" formControlName="street"
+                  class="form-control form-input                                                                                  login-input"
+                  id="address" placeholder="Street">
+                </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group" [formGroupName]="i">
+                    <input appInputButtomBordered type="text" formControlName="landMark"
+                      class="form-control form-input                                                                                  login-input"
+                      id="address" placeholder="Land Mark">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group" [formGroupName]="i">
+                    <input appInputButtomBordered type="text" formControlName="city"
+                      class="form-control form-input                                                                                  login-input"
+                      id="address" placeholder="City">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group" [formGroupName]="i">
+                    <input appInputButtomBordered type="text" formControlName="state"
+                      class="form-control form-input                                                                                  login-input"
+                      id="address" placeholder="State">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group" [formGroupName]="i">
+                    <input appInputButtomBordered type="text" formControlName="dist"
+                      class="form-control form-input                                                                                  login-input"
+                      id="address" placeholder="Dist">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group" [formGroupName]="i">
+                    <input appInputButtomBordered type="text" formControlName="zip"
                 class="form-control form-input                                                                                  login-input"
-                id="address" placeholder="address">
+                id="address" placeholder="Zip">
             </div>
           </div>
+        </div>
           <a (click)="addAddress()" class="pointer pull-left margin-top-sm">Add Address <span
               class=" glphicon glyphicon-plus"></span></a>
-        </div>
       </div>
     </div>
     <div class="row">

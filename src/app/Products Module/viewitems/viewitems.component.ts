@@ -8,6 +8,7 @@ import { RootReducerState } from 'src/app/State Management/reducers';
 import { UserSuccessAction } from 'src/app/State Management/actions/user-action';
 import { Store } from '@ngrx/store';
 import { NotificationService } from 'src/app/Notification/notification-service';
+import { AuthUtils } from 'src/app/shared/utility/auth-utils';
 @Component({
   selector: 'app-viewitems',
   templateUrl: './viewitems.component.html',
@@ -78,14 +79,20 @@ export class ViewitemsComponent implements OnInit {
   }
 
   addToCart() {
-    this.apiService.addToCart(this.product).subscribe((res) => {
-      this.store.dispatch(new UserSuccessAction(res));
-      this.notificationService.showNotification("success", `Item added to Cart`)
-      this.isAddedToCart = false;
-    }, () => {
-      this.isAddedToCart = true;
-      this.notificationService.showNotification("error", 'Something went wrong, Please try again..');
-    })
+    const isUser = AuthUtils.getAuthToken();
+    if (isUser) {
+     this.apiService.addToCart(this.product).subscribe((res) => {
+       this.store.dispatch(new UserSuccessAction(res));
+       this.notificationService.showNotification("success", `Item added to Cart`)
+       this.isAddedToCart = false;
+     }, () => {
+       this.isAddedToCart = true;
+          this.notificationService.showNotification("error", 'Please Sign In');
+          this.router.navigate(['/user']);
+        })
+   } else {
+     this.router.navigate(['/user']);
+   }
   }
   showCart(){
     this.router.navigate(['cart']);
@@ -95,7 +102,8 @@ export class ViewitemsComponent implements OnInit {
       this.store.dispatch(new UserSuccessAction(res));
       this.router.navigate(['cart']);
     }, () => {
-      this.notificationService.showNotification("error", 'Something went wrong, Please try again..');
+      this.notificationService.showNotification("error", 'Please Sign In');
+      this.router.navigate(['/user']);
     })
   }
 }

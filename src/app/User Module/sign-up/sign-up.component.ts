@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/shared/services/api-service';
 import { NotificationService } from 'src/app/Notification/notification-service';
+import { RootReducerState } from 'src/app/State Management/reducers';
+import { Store } from '@ngrx/store';
+import { UserSuccessAction } from 'src/app/State Management/actions/user-action';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -16,6 +19,7 @@ export class SignUpComponent implements OnInit {
   constructor(private router: Router,
     private apiService: ApiService,
     private notificationService: NotificationService,
+    private store: Store<RootReducerState>,
     private userRegistrationBuilder: FormBuilder) { }
 
   get name() {
@@ -35,21 +39,27 @@ export class SignUpComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(8)]],
       phone: ['',],
       dateOfBirth: [null,],
-      address:["",],
+      address: [[],],
       cart: [[]],
       history: [[]],
       cards: [[]],
+      orders: [[]],
       profilePhoto: ["",]
     });
   }
 
   RegisterUser() {
-    console.log(this.userRegistrationForm.value)
     if (this.userRegistrationForm.valid) {
+      let user = this.userRegistrationForm.value;
+      let loginUser = {};
+      loginUser = Object.assign({ "email": user.email, "password": user.password })
       this.apiService.signup(this.userRegistrationForm.value).subscribe((res) => {
+        this.apiService.loginAndSetToken(loginUser).subscribe((res) => {
+          this.router.navigate(['home']);
+          this.store.dispatch(new UserSuccessAction(res));
+        }, (error) => {
+        });
         this.notificationService.showNotification("success", "You have successfully signed up");
-        console.log(res);
-        this.router.navigate(['home']);
         }, (error) => {
         this.isSubmitted = !this.isSubmitted;
         });

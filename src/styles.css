@@ -708,3 +708,42 @@ a{
   position: absolute;
   bottom: 90px;
 }
+
+/* Form validation */
+.redColor {
+  color: #F16C51;
+  display: inline-block;
+  font-size: 15px;
+  font-weight: normal;
+  left: 0px;
+  margin: 0 auto;
+  padding: 4px;
+  position: relative;
+  top: -1px;
+}
+.hideClass{
+  display:none;
+}
+.err-btm-border{
+  border-bottom: 3px solid #F16C51 !important;
+  transition: all 0.5s ease-in-out 0s;
+  box-sizing: border-box;
+}
+.wrong-user{
+  color: #F16C51;
+  display: inline-block;
+  font-size: 15px;
+  font-weight: normal;
+  left: 0px;
+  margin: 0 auto;
+  padding: 4px;
+  position: relative;
+  top: 15px;
+  text-align: center;
+}
+::-webkit-scrollbar{width:1rem;height:1rem;}
+::-webkit-scrollbar-track{background:#d1e5e9;}
+::-webkit-scrollbar-thumb{background:#74d2e7;border-radius:10px;}
+a{
+  cursor: pointer !important;
+}

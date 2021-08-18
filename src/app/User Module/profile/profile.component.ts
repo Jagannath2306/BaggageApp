@@ -45,7 +45,18 @@ export class ProfileComponent implements OnInit {
   }
   addAddress(data) {
     this.address.push(this.fb.group({
-      address: data ? data.address : ''
+      firstName: data ? data.firstName : '',
+      lastName: data ? data.lastName : '',
+      phone: data ? data.phone : '',
+      email: data ? data.email : '',
+      street: data ? data.street : '',
+      landMark: data ? data.landMark : '',
+      city: data ? data.city : '',
+      state: data ? data.state : '',
+      dist: data ? data.dist : '',
+      zip: data ? data.zip : '',
+      addressNo: data ? data.zip : '',
+
     }));
     return false;
   }
@@ -63,10 +74,13 @@ export class ProfileComponent implements OnInit {
   }
   submitForm() {
     if (this.userRegistrationForm.value) {
-      this.apiService.updateProfile(this.userRegistrationForm.value).subscribe((res) => {
-        this.apiService.fatchUser().subscribe((res) => {
-          this.store.dispatch(new UserSuccessAction(res));
-        });
+      let User = this.userRegistrationForm.value;
+      User.address.forEach((element, index) => {
+        return element.addressNo = index;
+      });
+      this.apiService.updateProfile(User).subscribe((res) => {
+        this.store.dispatch(new UserSuccessAction(res));
+        this.loggedUser = res;
         this.notificationService.showNotification("success", "Your Profile has been Updated successfully..!!");
         $("#profile-form").toggle();
         $(".userinfo").toggle();
@@ -80,7 +94,10 @@ export class ProfileComponent implements OnInit {
     $(".userinfo").toggle();
     this.setControlValues(this.loggedUser);
   }
-
+  removeAddress(address?: any, ind?: number) {
+    console.log(address)
+    console.log(ind)
+  }
   // @ViewChild('fileupload') fileupload: ElementRef;
   //////////////////// or //////////////////////////
   onFileSelected(evt) {

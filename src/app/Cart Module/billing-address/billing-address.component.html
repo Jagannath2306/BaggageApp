@@ -31,186 +31,273 @@
             <!-- Navigation section -->
 
             <!-- form section -->
-
-            <form role="form">
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="D_fname">* First Name</label>
-                    <input appInputButtomBordered type="text" class="form-control form-input
-                      login-input" id="D_fname"
-                      placeholder="First Name">
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="D_lname">* Last Name</label>
-                    <input appInputButtomBordered type="text" class="form-control form-input
-                      login-input" id="D_lname"
-                      placeholder="Last Name">
-                  </div>
-                </div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12" style="padding: 0% 6%;">
+                <span>Please Select an Address or add a New Address</span>
+                <a class="pull-right text-primary" *ngIf="isSelect" (click)="addNewAddress()"> <em
+                    class="glyphicon glyphicon-globe"></em> Add a new address</a>
+                <a class="pull-right text-primary" *ngIf="!isSelect" (click)="choseAddress()"> <em
+                    class=" glyphicon glyphicon-globe"></em> Choose An Address</a>
               </div>
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="D_phone">* Phone</label>
-                    <input appInputButtomBordered type="text" class="form-control form-input
-                      login-input" id="D_phone"
-                      placeholder="Phone No">
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="D_email">* Email</label>
-                    <input appInputButtomBordered type="text" class="form-control form-input
-                      login-input" id="D_email"
-                      placeholder="Email">
-                  </div>
-                </div>
               </div>
-              <div class="row">
-                <div class="col-xs-12">
-                  <div class="form-group">
-                    <label for="Delivery">* Delivery To</label>
-                    <textarea appInputButtomBordered class="form-control form-input login-input"
-                      rows="3" placeholder="Delivery To..." id="Delivery"></textarea>
-                  </div>
+              <form [formGroup]="billingAddress" (ngSubmit)="submitForm()" action="/singleUserUpdate" method="POST"
+                enctype="multipart/form-data" id="selectAdd">
+                <div class="row padding-all">
+                  <div formArrayName="address">
+                    <div *ngFor="let address of address.controls; let i=index">
+                      <label class="radio-inline">
+                        <input type="radio" name="optradio" (change)="radioChangeHandler(address)" value="{{address}}"
+                          *ngIf="i == 0 ? 'checked' : 'abc' ">
+                        <div class="col-sm-12"> <label for="usr" class="text-primary"> Delivery Address {{i + 1}}</label>
+                        </div>
+                      <div class="col-sm-6">
+                        <div class="form-group" [formGroupName]="i">
+                          <label for="D_fname">* First Name</label>
+                          <input formControlName="firstName" appInputButtomBordered type="text" class="form-control form-input login-input"
+                            id="D_fname" [class.err-btm-border]="isSubmitted" placeholder="First Name">
+                        <!-- <div *ngIf="billingAddress.get('firstName').invalid && billingAddress.get('firstName').touched">
+                            <small *ngIf="firstName.errors?.required" class="redColor">
+                              First Name is required.
+                            </small>
+                          </div> -->
+                          </div>
+                          </div>
+                          <div class="col-sm-6">
+                        <div class="form-group" [formGroupName]="i">
+                          <label for="D_lname">* Last Name</label>
+                          <input formControlName="lastName" appInputButtomBordered type="text" class="form-control form-input login-input"
+                            id="D_lname" [class.err-btm-border]="isSubmitted" placeholder="Last Name">
+                          <!-- <div *ngIf="billingAddress.get('lastName').invalid && billingAddress.get('lastName').touched">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <small *ngIf="lastName.errors?.required" class="redColor">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    Last Name is required.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </small>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div> -->
+                          </div>
+                          </div>
+                      <div class="col-sm-6">
+                        <div class="form-group" [formGroupName]="i">
+                          <label for="D_phone">* Phone</label>
+                          <input formControlName="phone" appInputButtomBordered type="text" class="form-control form-input login-input"
+                            id="D_phone" placeholder="Phone No">
+                          <!-- <div *ngIf="billingAddress.get('phone').invalid && billingAddress.get('phone').touched">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      <small *ngIf="phone.errors?.required" class="redColor">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        Phone No is required.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      </small>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </div> -->
+                          </div>
+                          </div>
+                          <div class="col-sm-6">
+                        <div class="form-group" [formGroupName]="i">
+                          <label for="D_phone">* Email Id</label>
+                          <input formControlName="email" appInputButtomBordered type="email" class="form-control form-input login-input"
+                            id="D_phone" placeholder="Email Id" [class.err-btm-border]="isSubmitted">
+                          <!-- <div *ngIf="billingAddress.get('email').invalid && billingAddress.get('email').touched">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <small *ngIf="email.errors?.email" class="redColor">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Please enter a valid Email ID e.g.: abc@abc.com</small>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <small *ngIf="email.errors?.required" class="redColor">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Email Id is required.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              </small>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </div> -->
+                        </div>
+                        </div>
+                        <div class="col-sm-12">
+                          <div class="form-group" [formGroupName]="i">
+                            <label for="usr">* Delivery Address</label>
+                            <input formControlName="street" appInputButtomBordered type="text" class="form-control form-input login-input"
+                              id="D_address" placeholder="Street Address">
+                          </div>
+                        </div>
+                        <div class="col-sm-12">
+                          <div class="form-group" [formGroupName]="i">
+                            <input formControlName="landMark" appInputButtomBordered type="text"
+                              class="form-control form-input
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        login-input"
+                              id="D_address" placeholder="Land Mark">
+                          </div>
+                        </div>
+                        <div class="col-sm-6" [formGroupName]="i">
+                          <div class="form-group">
+                          <input formControlName="city" appInputButtomBordered type="text" class="form-control form-input login-input" id="D_city"
+                            placeholder="City">
+                          <!-- <div *ngIf="billingAddress.get('city').invalid && billingAddress.get('city').touched">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <small *ngIf="city.errors?.required" class="redColor">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    City is required.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </small>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </div> -->
+                          </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="form-group" [formGroupName]="i">
+                              <input formControlName="state" appInputButtomBordered type="text" class="form-control form-input login-input"
+                                id="D_region" placeholder="State">
+                              <!-- <div *ngIf="billingAddress.get('state').invalid && billingAddress.get('state').touched">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <small *ngIf="state.errors?.required" class="redColor">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          State is required.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </small>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      </div> -->
+                            </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="form-group" [formGroupName]="i">
+                              <input formControlName="dist" appInputButtomBordered type="text" class="form-control form-input login-input"
+                                id="D_region" placeholder="Dist" [class.err-btm-border]="isSubmitted">
+                              <!-- <div *ngIf="billingAddress.get('dist').invalid && billingAddress.get('dist').touched">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <small *ngIf="dist.errors?.required" class="redColor">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          Dist is required.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </small>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      </div> -->
+                            </div>
+                          </div>
+                        <div class="col-sm-6">
+                          <div class="form-group" [formGroupName]="i">
+                            <input formControlName="zip" appInputButtomBordered type="text" class="form-control form-input login-input"
+                              id="D_post-zip" placeholder="Postal / Zip code" [class.err-btm-border]="isSubmitted">
+                            <!-- <div *ngIf="billingAddress.get('zip').invalid && billingAddress.get('zip').touched">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <small *ngIf="zip.errors?.required" class="redColor">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            Zip code is required.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          </small>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </div> -->
+                        </div>
+                        </div>
+                        </label>
+                        </div>
+                        </div>
+                        </div>
+                <div class="row">
+                <div class="form-group col-xs-12">
+                  <button type="submit" class="btn btn-subscribe btn-order pull-right form-control btn-shutter">Continue</button>
                 </div>
-              </div>
-
+                </div>
+                </form>
+                <form [formGroup]="addbillingAddress" (ngSubmit)="submitAddress()" action="/singleUserUpdate" method="POST"
+                  enctype="multipart/form-data" id="newAdd" style="display:none">
+                  <div class="row padding-all">
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label for="D_fname">* First Name</label>
+                        <input formControlName="firstName" appInputButtomBordered type="text" class="form-control form-input login-input"
+                          id="D_fname" [class.err-btm-border]="isSubmitted" placeholder="First Name">
+                        </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                            <label for="D_lname">* Last Name</label>
+                            <input formControlName="lastName" appInputButtomBordered type="text" class="form-control form-input login-input"
+                              id="D_lname" [class.err-btm-border]="isSubmitted" placeholder="Last Name">
+                        </div>
+                        </div>
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                          <label for="D_phone">* Phone</label>
+                          <input formControlName="phone" appInputButtomBordered type="text" class="form-control form-input login-input"
+                            id="D_phone" placeholder="Phone No">
+                          </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                          <label for="D_phone">* Email Id</label>
+                          <input formControlName="email" appInputButtomBordered type="email" class="form-control form-input login-input"
+                            id="D_phone" placeholder="Email Id" [class.err-btm-border]="isSubmitted">
+                          </div>
+                          </div>
+                          <div class="col-sm-12">
+                            <div class="form-group">
+                              <label for="usr">* Delivery Address</label>
+                              <input formControlName="street" appInputButtomBordered type="text" class="form-control form-input login-input"
+                                id="D_address" placeholder="Street Address">
+                            </div>
+                            </div>
+                        <div class="col-sm-12">
+                          <div class="form-group">
+                            <input formControlName="landMark" appInputButtomBordered type="text" class="form-control form-input login-input"
+                              id="D_address" placeholder="Land Mark">
+                          </div>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="form-group">
+                          <input formControlName="city" appInputButtomBordered type="text" class="form-control form-input login-input" id="D_city"
+                            placeholder="City">
+                          </div>
+                          </div>
+                          <div class="col-sm-6">
+                            <div class="form-group">
+                              <input formControlName="state" appInputButtomBordered type="text" class="form-control form-input login-input"
+                                id="D_region" placeholder="State">
+                              </div>
+                              </div>
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                          <input formControlName="dist" appInputButtomBordered type="text" class="form-control form-input login-input"
+                            id="D_region" placeholder="Dist" [class.err-btm-border]="isSubmitted">
+                          </div>
+                          </div>
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                          <input formControlName="zip" appInputButtomBordered type="text" class="form-control form-input login-input"
+                            id="D_post-zip" placeholder="Postal / Zip code" [class.err-btm-border]="isSubmitted">
+                          </div>
+                          </div>
+                          </div>
+                    <div class="row">
+                      <div class="form-group col-xs-12">
+                        <button type="submit" class="btn btn-subscribe btn-order pull-right form-control btn-shutter">Continue</button>
+                        </div>
+                      </div>
+                </form>
+          </div>
+          </div>
+          <div class="col-md-4 col-sm-12 col-xs-12">
+            <div class="cart-box">
               <div class="row">
                 <div class="col-sm-12">
-                  <div class="form-group">
-                    <label for="usr">* Delivery Address</label>
-                    <input appInputButtomBordered type="text" class="form-control form-input
-                      login-input" id="D_address"
-                      placeholder="Street Address">
+                  <h3 class="pro-details border-gray">PRICE DETAILS</h3>
+                </div>
+                <div class="col-sm-12">
+                  <div class="pro-text">
+                    <span><b>Price (2 items)</b></span>
+                    <span class="pull-right">&#8377; 7,500.00</span>
+                  </div>
+                  <div class="pro-text border-gray">
+                    <span><b>Delivery</b></span>
+                    <span class="pull-right" style="color:green">FREE</span>
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <input appInputButtomBordered type="text" class="form-control form-input
-                      login-input" id="D_city"
-                      placeholder="City">
+                <div class="col-sm-12 pro-total">
+                  <div class="border-gray">
+                    <span class=""><b>Total Payable</b></span>
+                    <span class="pull-right">&#8377; 7,500.00</span>
                   </div>
                 </div>
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <input appInputButtomBordered type="text" class="form-control form-input
-                      login-input" id="D_region"
-                      placeholder="Region">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <input appInputButtomBordered type="text" class="form-control form-input
-                      login-input" id="D_post-zip"
-                      placeholder="Postal / Zip code">
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <input appInputButtomBordered list="coutries" placeholder="Country"
-                      class="form-control form-input login-input">
-
-                    <datalist id="coutries">
-                      <option value="India" selected>
-                        <option value="US">
-                          <option value="UK">
-                            <option value="UAE">
-                              <option value="Canada">
-                              </datalist>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-xs-12">
-                            <div class="form-group">
-                              <label for="comment">Delivery Description</label>
-                              <textarea appInputButtomBordered class="form-control form-input
-                                login-input" rows="3"
-                                id="Remarks" placeholder="Description...."></textarea>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-xs-12">
-                            <div class="form-group">
-                              <label for="comment">Remarks</label>
-                              <textarea appInputButtomBordered class="form-control form-input
-                                login-input" rows="3"
-                                id="Remarks" placeholder="Remarks..."></textarea>
-                            </div>
-                          </div>
-                        </div>
-                      </form>
-                      <div class="place-order">
-                        <div class="form-group col-xs-12">
-                          <button class="btn btn-subscribe btn-order pull-right
-                            form-control
-                            btn-shutter" (click)="showPaymentPortal()">Continue</button>
-                        </div>
-                        <br> <br> <br> <br> <br>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 col-sm-12 col-xs-12">
-                    <div class="cart-box">
-                      <div class="row">
-                        <div class="col-sm-12">
-                          <h3 class="pro-details border-gray">PRICE DETAILS</h3>
-                        </div>
-                        <div class="col-sm-12">
-                          <div class="pro-text">
-                            <span><b>Price (2 items)</b></span>
-                            <span class="pull-right">&#8377; 7,500.00</span>
-                          </div>
-                          <div class="pro-text border-gray">
-                            <span><b>Delivery</b></span>
-                            <span class="pull-right" style="color:green">FREE</span>
-                          </div>
-                        </div>
-                        <div class="col-sm-12 pro-total">
-                          <div class="border-gray">
-                            <span class=""><b>Total Payable</b></span>
-                            <span class="pull-right">&#8377; 7,500.00</span>
-                          </div>
-                        </div>
-                        <div class="col-sm-12">
-                          <div class="pro-text">
-                            <span class="" style="color:green"><b>You will save
-                                ₹1,300 on
-                                this order</b></span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4 text-center" style="margin-top:50px;">
-                        <h3>Follow Us</h3>
-                  </div>
-                  <div class="col-md-4 text-center" id="contRow">
-                    <ul class="faicons">
-                      <li class="faspot_1"><a href=""><i class="fa fa-linkedin
-                            fa-3x"></i></a></li>
-                      <li class="faspot_2"><a href=""><i class="fa fa-facebook
-                            fa-3x"></i></a></li>
-                      <li class="faspot_3"><a href=""><i class="fa fa-twitter
-                            fa-2x"></i></a></li>
-                      <li class="faspot_4"><a href=""><i class="fa
-                            fa-google-plus fa-2x"></i></a></li>
-                      <li class="faspot_5"><a href=""><i class="fa fa-reddit
-                            fa-2x"></i></a></li>
-                      <li class="faspot_6"><a href=""><i class="fa fa-git
-                            fa-2x"></i></a></li>
-                    </ul>
+                <div class="col-sm-12">
+                  <div class="pro-text">
+                    <span class="" style="color:green"><b>You will save
+                        ₹1,300 on
+                        this order</b></span>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
+          <div class="col-md-4 text-center" style="margin-top:50px;">
+            <h3>Follow Us</h3>
+          </div>
+          <div class="col-md-4 text-center" id="contRow">
+            <ul class="faicons">
+              <li class="faspot_1"><a href=""><i class="fa fa-linkedin
+                            fa-3x"></i></a></li>
+            <li class="faspot_2"><a href=""><i class="fa fa-facebook
+                            fa-3x"></i></a></li>
+            <li class="faspot_3"><a href=""><i class="fa fa-twitter
+                            fa-2x"></i></a></li>
+            <li class="faspot_4"><a href=""><i class="fa
+                            fa-google-plus fa-2x"></i></a></li>
+            <li class="faspot_5"><a href=""><i class="fa fa-reddit
+                            fa-2x"></i></a></li>
+            <li class="faspot_6"><a href=""><i class="fa fa-git
+                            fa-2x"></i></a></li>
+          </ul>
+          </div>
+          </div>
+          </div>
+          </div>
           </div>

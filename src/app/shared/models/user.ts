@@ -9,5 +9,6 @@ export interface User {
     cart: Array<any>,
     history: Array<any>,
     cards: Array<any>,
+    orders: Array<any>,
     profileImg: String
 }

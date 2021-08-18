@@ -6,7 +6,7 @@ import { routing } from './Cart.routing';
 import { BillingAddressComponent } from './billing-address/billing-address.component';
 import { PaymentPortalComponent } from './payment-portal/payment-portal.component';
 import { ReviewComponent } from './review/review.component';
-import {FormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [MyCartComponent, BillingAddressComponent, PaymentPortalComponent, ReviewComponent],
@@ -14,6 +14,7 @@ import {FormsModule} from '@angular/forms';
     CommonModule,
     SharedModule,
     FormsModule,
+    ReactiveFormsModule,
     routing
   ],
   exports:[MyCartComponent]

@@ -50,6 +50,9 @@ export class ApiService {
     deleteCart(param?: any): Observable<any> {
         return this.httpService.delete("/user/update/cart/delete", param);
     }
+    orders(body: any): Observable<any> {
+        return this.httpService.patch("/user/update/orders", body);
+    }
     fatchUser(param?: any): Observable<User> {
         return this.httpService.get("/user/fatch");
     }

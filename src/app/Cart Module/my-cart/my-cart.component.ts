@@ -21,6 +21,8 @@ export class MyCartComponent implements OnInit {
   count_data: any;
   userData: any;
   update_data = [];
+  orders: any
+  orderCount: number = 0
   constructor(
     private router: Router,
     private actRouter: ActivatedRoute,
@@ -37,6 +39,7 @@ export class MyCartComponent implements OnInit {
       this.CartProducts = this.userData.cart;
       this.totalAmount = 0;
       this.disAmount = 0;
+      this.orderCount = getStoreData.orders.length;
       this.CartProducts.map((element) => {
         const totalPrice = element.itemPrice;
         const itemDescPrice = element.itemPrice * 15 / 100
@@ -108,7 +111,38 @@ export class MyCartComponent implements OnInit {
   }
 
   placeOrder() {
-    this.router.navigate(["cart/billingAddress"]);
-  }
+    this.orders = Object.assign({
+      "orderId": this.userData.orders.length + 1,
+      "address": [],
+      "cards": [],
+      "items": this.CartProducts,
+      "orderPlaced": false
+    });
+    this.userRepo.getLogedUser().subscribe((getStoreData) => {
+      let userOrders = getStoreData.orders;
+      if (userOrders.length >= 1) {
+        if (userOrders[userOrders.length - 1].orderPlaced == true) {
+          this.userData.orders.push(this.orders);
+          this.store.dispatch(new UserSuccessAction(this.userData));
+          this.router.navigate(["cart/billingAddress"]);
+        } else {
+          this.router.navigate(["cart/billingAddress"]);
+        }
+      } else {
+        this.userData.orders.push(this.orders);
+        this.store.dispatch(new UserSuccessAction(this.userData));
+        this.router.navigate(["cart/billingAddress"]);
+      }
+    })
 
+
+
+    //   this.apiService.orders(this.orders).subscribe((res) => {
+    //     this.store.dispatch(new UserSuccessAction(res))
+    //   }, (err) => { })
+    //   this.userRepo.getLogedUser().subscribe((getStoreData) => {
+    //     console.log(getStoreData)
+    //   })
+    //   this.router.navigate(["cart/billingAddress"]);
+  }
 }

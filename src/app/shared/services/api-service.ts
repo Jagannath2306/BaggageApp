@@ -53,6 +53,15 @@ export class ApiService {
     orders(body: any): Observable<any> {
         return this.httpService.patch("/user/update/orders", body);
     }
+    addAddress(body: any): Observable<any> {
+        return this.httpService.patch("/user/update/address", body);
+    }
+    addCards(body: any): Observable<any> {
+        return this.httpService.patch("/user/update/cards", body);
+    }
+    deleteAddress(param?: any): Observable<any> {
+        return this.httpService.delete("/user/delete/address", param);
+    }
     fatchUser(param?: any): Observable<User> {
         return this.httpService.get("/user/fatch");
     }

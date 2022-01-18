@@ -11,17 +11,19 @@ import { UserRepository } from './Repositories/User-repo';
 import { ApiProductsService } from './services/api-products-service';
 import { ProductsRepository } from './Repositories/Products-repo';
 import { InterceptorService } from './Token intercepter/interceptor.service';
+import { CardFormatPipe } from './Pipes/card-format.pipe';
+import { ExpireDateFormatPipe } from './Pipes/expire-date-format.pipe';
 
 
 
 @NgModule({
-  declarations: [InputButtomBorderedDirective],
+  declarations: [InputButtomBorderedDirective, CardFormatPipe, ExpireDateFormatPipe],
   imports: [
     CommonModule,
     HttpClientModule
   ],
   exports: [
-    InputButtomBorderedDirective
+    InputButtomBorderedDirective, CardFormatPipe,ExpireDateFormatPipe
   ],
   providers: [
     HttpService,

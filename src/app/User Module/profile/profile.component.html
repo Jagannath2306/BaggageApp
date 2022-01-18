@@ -171,8 +171,7 @@
           <div *ngFor="let address of address.controls; let i=index">
             <div class="col-sm-12">
               <label for="usr" class="text-primary"> Delivery Address {{i + 1}}</label>
-              <button type="button" class="btn btn-danger
-                                                          pull-right" (click)="removeAddress(address.value,i)"><i
+              <button type="button" class="btn btn-danger pull-right" (click)="removeAddress(address.value,i)"><i
                   class="glyphicon glyphicon-trash"></i></button>
             </div>
             <div class="col-sm-6">

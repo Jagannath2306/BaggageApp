@@ -47,9 +47,10 @@
                     <div *ngFor="let address of address.controls; let i=index">
                       <label class="radio-inline">
                         <input type="radio" name="optradio" (change)="radioChangeHandler(address)" value="{{address}}"
-                          *ngIf="i == 0 ? 'checked' : 'abc' ">
+                          >
                         <div class="col-sm-12"> <label for="usr" class="text-primary"> Delivery Address {{i + 1}}</label>
                         </div>
+                       
                       <div class="col-sm-6">
                         <div class="form-group" [formGroupName]="i">
                           <label for="D_fname">* First Name</label>
@@ -202,37 +203,42 @@
                           </div>
                           <div class="col-sm-12">
                             <div class="form-group">
-                              <label for="usr">* Delivery Address</label>
+                              <label for="usr">* Street</label>
                               <input formControlName="street" appInputButtomBordered type="text" class="form-control form-input login-input"
                                 id="D_address" placeholder="Street Address">
                             </div>
                             </div>
                         <div class="col-sm-12">
                           <div class="form-group">
+                            <label for="usr">* Land Mark</label>
                             <input formControlName="landMark" appInputButtomBordered type="text" class="form-control form-input login-input"
                               id="D_address" placeholder="Land Mark">
                           </div>
                         </div>
                         <div class="col-sm-6">
                           <div class="form-group">
+                            <label for="usr">* City</label>
                           <input formControlName="city" appInputButtomBordered type="text" class="form-control form-input login-input" id="D_city"
                             placeholder="City">
                           </div>
                           </div>
                           <div class="col-sm-6">
                             <div class="form-group">
+                              <label for="usr">* State</label>
                               <input formControlName="state" appInputButtomBordered type="text" class="form-control form-input login-input"
                                 id="D_region" placeholder="State">
                               </div>
                               </div>
                       <div class="col-sm-6">
                         <div class="form-group">
+                          <label for="usr">* Dist</label>
                           <input formControlName="dist" appInputButtomBordered type="text" class="form-control form-input login-input"
                             id="D_region" placeholder="Dist" [class.err-btm-border]="isSubmitted">
                           </div>
                           </div>
                       <div class="col-sm-6">
                         <div class="form-group">
+                          <label for="usr">* Postal / Zip code</label>
                           <input formControlName="zip" appInputButtomBordered type="text" class="form-control form-input login-input"
                             id="D_post-zip" placeholder="Postal / Zip code" [class.err-btm-border]="isSubmitted">
                           </div>

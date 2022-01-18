@@ -113,7 +113,7 @@ export class MyCartComponent implements OnInit {
   placeOrder() {
     this.orders = Object.assign({
       "orderId": this.userData.orders.length + 1,
-      "address": [],
+      "address":"",
       "cards": [],
       "items": this.CartProducts,
       "orderPlaced": false

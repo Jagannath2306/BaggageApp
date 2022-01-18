@@ -55,12 +55,17 @@ export class ProfileComponent implements OnInit {
       state: data ? data.state : '',
       dist: data ? data.dist : '',
       zip: data ? data.zip : '',
-      addressNo: data ? data.zip : '',
+      addressNo: data ? data.addressNo : '',
 
     }));
     return false;
   }
-  setControlValues(user) {
+  setControlValues() {
+    let user;
+    this.userRepo.getLogedUser().subscribe((getStoreData) => {
+      user = getStoreData;
+      // this.setControlValues(this.loggedUser);
+    });
     this.userRegistrationForm.patchValue({
       name: user.name,
       email: user.email,
@@ -80,10 +85,7 @@ export class ProfileComponent implements OnInit {
       });
       this.apiService.updateProfile(User).subscribe((res) => {
         this.store.dispatch(new UserSuccessAction(res));
-        this.loggedUser = res;
         this.notificationService.showNotification("success", "Your Profile has been Updated successfully..!!");
-        $("#profile-form").toggle();
-        $(".userinfo").toggle();
       }, (err) => {
 
       })
@@ -92,11 +94,14 @@ export class ProfileComponent implements OnInit {
   editProfile() {
     $("#profile-form").toggle();
     $(".userinfo").toggle();
-    this.setControlValues(this.loggedUser);
+    this.setControlValues();
   }
   removeAddress(address?: any, ind?: number) {
-    console.log(address)
-    console.log(ind)
+    this.apiService.deleteAddress(address).subscribe((res) => {
+      this.loggedUser = res;
+      this.store.dispatch(new UserSuccessAction(res));
+      this.setControlValues();
+    })
   }
   // @ViewChild('fileupload') fileupload: ElementRef;
   //////////////////// or //////////////////////////

@@ -71,7 +71,6 @@ export class BillingAddressComponent implements OnInit {
   ngOnInit() {
     this.userRepo.getLogedUser().subscribe((getStoreData) => {
       this.loggedUser = getStoreData;
-      console.log(this.loggedUser)
     });
     this.setControlValues(this.loggedUser);
   }
@@ -106,15 +105,36 @@ export class BillingAddressComponent implements OnInit {
     this.selectedAddress = address.value;
   }
   submitForm() {
-    alert("selected")
-    this.loggedUser.orders[this.loggedUser.orders.length - 1].address = this.selectedAddress;
-    this.store.dispatch(new UserSuccessAction(this.loggedUser));
-    console.log(this.loggedUser);
-
-
+    this.userRepo.getLogedUser().subscribe((getStoreData) => {
+      let userOrders = getStoreData.orders;
+      if (userOrders.length >= 1) {
+        if (userOrders[userOrders.length - 1].orderPlaced == true) {
+          this.loggedUser.orders[userOrders.length - 1].address = this.selectedAddress;
+          this.store.dispatch(new UserSuccessAction(this.loggedUser));
+          this.router.navigate(["cart/paymentPortal"]);
+          console.log(this.loggedUser)
+        } else {
+          this.loggedUser.orders[userOrders.length - 1].address = this.selectedAddress;
+          this.store.dispatch(new UserSuccessAction(this.loggedUser));
+           this.router.navigate(["cart/paymentPortal"]);
+          console.log(this.loggedUser)
+        }
+      }
+      
+    });
   }
   submitAddress() {
-    alert("hii")
+    if (this.addbillingAddress.value) {
+      let userAddress = {};
+      userAddress = Object.assign({ "addressNo": this.loggedUser.address.length }, this.addbillingAddress.value)
+      this.apiService.addAddress(userAddress).subscribe((res) => {
+        this.store.dispatch(new UserSuccessAction(res));
+      })
+      this.loggedUser.orders[this.loggedUser.orders.length - 1].address = userAddress;
+      this.store.dispatch(new UserSuccessAction(this.loggedUser));
+      console.log(this.loggedUser)
+      this.router.navigate(["cart/paymentPortal"]);
+    }
   }
   choseAddress() {
     $("#selectAdd").toggle();

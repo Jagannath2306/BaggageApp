@@ -18,8 +18,6 @@ import * as bootstrap from "bootstrap";
 import * as $ from "jquery";
 import { StoreModule } from '@ngrx/store';
 import { rootReducer } from 'src/app/State Management/reducers';
-import { TextMaskModule } from 'angular2-text-mask';
-import { FormsModule } from '@angular/forms';
 declare var thirdLib: any;
 
 /**
@@ -79,8 +77,6 @@ const customNotifierOptions: NotifierOptions = {
     BrowserModule,
     routing,
     SharedModule,
-    TextMaskModule,
-    FormsModule,
     NotifierModule.withConfig(customNotifierOptions),
     StoreModule.forRoot(rootReducer,{
       runtimeChecks: {

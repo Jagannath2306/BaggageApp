@@ -16,8 +16,6 @@ import { RootReducerState } from 'src/app/State Management/reducers';
 export class PaymentPortalComponent implements OnInit {
   loggedUser: any;
   // paymentForm: FormGroup;
-  isSubmitted: boolean = false;
-  public mask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
   constructor(
     private router: Router,
     private actRouter: ActivatedRoute,
@@ -44,7 +42,6 @@ export class PaymentPortalComponent implements OnInit {
     });
   }
   submitForm() {
-    this.isSubmitted = true;
     if (this.paymentForm.valid) {
       let usercards = {};
       usercards = Object.assign({ "cardNo": this.loggedUser.cards.length }, this.paymentForm.value)

@@ -45,11 +45,11 @@
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                        <label>CARD NUMBER</label>
+                        <label>CARD NUMBER *</label>
                         <div class="">
                           <input type="text" formControlName="cardNumber" class="form-control form-control form-input login-input"
                             appInputButtomBordered [value]="paymentForm.get('cardNumber').value | cardFormat" maxlength="19"
-                            placeholder="Valid Card Number" required />
+                            placeholder="Card Number" required />
                           
                           <div *ngIf="validation.cardNumber.invalid && (validation.cardNumber.dirty || validation.cardNumber.touched)">
                             <small *ngIf="validation.cardNumber.errors.required" class="redColor">
@@ -66,28 +66,52 @@
                   <div class="row">
                     <div class="col-xs-7 col-md-7">
                       <div class="form-group">
-                        <label><span class="hidden-xs">EXPIRATION</span><span
-                            class="visible-xs-inline">EXP</span> DATE</label>
+                        <label><span class="hidden-xs">EXPIRATION </span><span
+                            class="visible-xs-inline">EXP</span> DATE *</label>
                         <input type="text" formControlName="cardExp" appInputButtomBordered maxlength="5"
-                        [textMask]="{mask: mask}" [(ngModel)]="paymentForm.cardExp" class="form-control form-control form-input login-input"
+                          [value]="paymentForm.get('cardExp').value | expireDateFormat" class="form-control form-control form-input login-input"
                           placeholder="MM / YY" />
+                          <div *ngIf="validation.cardExp.invalid && (validation.cardExp.dirty || validation.cardExp.touched)">
+                            <small *ngIf="validation.cardExp.errors.required" class="redColor">
+                              Exp date and year is required
+                            </small>
+                            <small *ngIf="validation.cardExp.errors?.minlength" class="redColor">
+                              Min Length should be 4 digits
+                            </small>
+                          </div>
                       </div>
                     </div>
                     <div class="col-xs-5 col-md-5 pull-right">
                       <div class="form-group">
-                        <label>CV CODE</label>
+                        <label>CV CODE *</label>
                         <input appInputButtomBordered type="text" formControlName="cardCvv"
-                          class="form-control form-control form-input login-input" placeholder="CVC"
+                          class="form-control form-control form-input login-input" placeholder="CVV" maxlength="3"
                           />
+                          <div *ngIf="validation.cardCvv.invalid && (validation.cardCvv.dirty || validation.cardCvv.touched)">
+                            <small *ngIf="validation.cardCvv.errors.required" class="redColor">
+                              Cvv is required
+                            </small>
+                            <small *ngIf="validation.cardCvv.errors?.minlength" class="redColor">
+                              Min Length should be 3 digits
+                            </small>
+                          </div>
                       </div>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-xs-12">
                       <div class="form-group">
-                        <label>CARD OWNER</label>
+                        <label>CARD OWNER *</label>
                         <input appInputButtomBordered type="text" formControlName="cardHolderName" class="form-control  form-input login-input"
                           placeholder="Card Owner Names" />
+                          <div *ngIf="validation.cardHolderName.invalid && (validation.cardHolderName.dirty || validation.cardHolderName.touched)">
+                            <small *ngIf="validation.cardHolderName.errors.required" class="redColor">
+                              Name is required
+                            </small>
+                            <small *ngIf="validation.cardHolderName.errors?.maxlength" class="redColor">
+                              Max Length should be 40 char
+                            </small>
+                          </div>
                       </div>
                     </div>
                   </div>

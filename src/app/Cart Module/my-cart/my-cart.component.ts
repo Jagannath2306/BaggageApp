@@ -123,6 +123,8 @@ export class MyCartComponent implements OnInit {
       if (userOrders.length >= 1) {
         if (userOrders[userOrders.length - 1].orderPlaced == true) {
           this.userData.orders.push(this.orders);
+          console.log( this.userData.orders);
+          
           this.store.dispatch(new UserSuccessAction(this.userData));
           this.router.navigate(["cart/billingAddress"]);
         } else {
@@ -130,6 +132,8 @@ export class MyCartComponent implements OnInit {
         }
       } else {
         this.userData.orders.push(this.orders);
+        console.log( this.userData.orders);
+        
         this.store.dispatch(new UserSuccessAction(this.userData));
         this.router.navigate(["cart/billingAddress"]);
       }

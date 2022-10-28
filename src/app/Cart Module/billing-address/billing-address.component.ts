@@ -111,12 +111,12 @@ export class BillingAddressComponent implements OnInit {
         if (userOrders[userOrders.length - 1].orderPlaced == true) {
           this.loggedUser.orders[userOrders.length - 1].address = this.selectedAddress;
           this.store.dispatch(new UserSuccessAction(this.loggedUser));
-          this.router.navigate(["cart/paymentPortal"]);
+          this.router.navigate(["cart/review"]);
           console.log(this.loggedUser)
         } else {
           this.loggedUser.orders[userOrders.length - 1].address = this.selectedAddress;
           this.store.dispatch(new UserSuccessAction(this.loggedUser));
-           this.router.navigate(["cart/paymentPortal"]);
+           this.router.navigate(["cart/review"]);
           console.log(this.loggedUser)
         }
       }
@@ -133,7 +133,7 @@ export class BillingAddressComponent implements OnInit {
       this.loggedUser.orders[this.loggedUser.orders.length - 1].address = userAddress;
       this.store.dispatch(new UserSuccessAction(this.loggedUser));
       console.log(this.loggedUser)
-      this.router.navigate(["cart/paymentPortal"]);
+      this.router.navigate(["cart/review"]);
     }
   }
   choseAddress() {
@@ -148,7 +148,7 @@ export class BillingAddressComponent implements OnInit {
   }
 
   showPaymentPortal() {
-    this.router.navigate(["cart/paymentPortal"]);
+    this.router.navigate(["cart/review"]);
   }
 
 }
